@@ -1,18 +1,19 @@
 module CommMaster 
-	(resp, resp_rdy, TX, RX, cmd, snd_cmd, data, clk, rst_n);
+	(resp, resp_rdy, frm_snt, TX, RX, cmd, snd_cmd, data, clk, rst_n);
 
 ///////////////////////////////////////////////
 // Module Interface Input and Outputs /////////
 ///////////////////////////////////////////////
 
-//outputs
+//// outputs ////
 output logic TX;
 
-//outputs for testbench 
+//// outputs for testbench ////
 output logic [7:0] resp;
 output logic resp_rdy;
+output logic frm_snt;
 
-//inputs 
+//// inputs ////
 input clk, rst_n;
 input RX;
 input [7:0] cmd;
@@ -27,7 +28,6 @@ input [15:0] data;
 logic [1:0] sel;
 logic trmt;
 logic tx_done;
-logic frm_snt;
 logic set_cmplt, clr_cmplt;
 
 logic [7:0] tx_data; //input to UART
@@ -35,12 +35,13 @@ logic [7:0] low_bits, mid_bits;
 
 
 //// Define state as enumerated type /////
-typedef enum reg {IDLE, WAITH, WAITM, WAITL} state_t;
+typedef enum reg [1:0] {IDLE, WAITH, WAITM, WAITL} state_t;
 state_t state, nxt_state;
 
 
 //// instantiate transceiver ////
-UART(.clk(clk),
+UART uartmod
+(.clk(clk),
 	.rst_n(rst_n),
 	.RX(RX),.TX(TX),
 	.rx_rdy(resp_rdy),
@@ -53,41 +54,41 @@ UART(.clk(clk),
 
 //// flops for high and mid bits ////
 always_ff @(posedge clk) begin
-	if(snd_cmd)
+	if(snd_cmd) begin
 		low_bits <= data[7:0];
+	end
 end
 
 always_ff @(posedge clk) begin
-	if(snd_cmd)
+	if(snd_cmd) begin
 		mid_bits <= data[15:8];
+	end
 end
 
 //// frm_snt flop ////
 always_ff @(posedge clk or negedge rst_n) begin
-	if(!rst_n) 
+	if(!rst_n) begin
 		frm_snt <= 1'b0;
-	else if (clr_cmplt)
+	end else if (clr_cmplt) begin
 		frm_snt <= 1'b0;
-	else if(set_cmplt)
+	end else if(set_cmplt) begin
 		frm_snt <= 1'b1;
+	end
 end
 
 //// tx_data select logic /////
-assign tx_data = 
-(sel ==  2'b01) ? mid_bits : 
-(sel ==  2'b10) ? cmd[7:0] :
-(sel ==  2'b00) ? low_bits; 
-
-
+assign tx_data = (sel ==  2'b01) ? (mid_bits) : 
+(sel == 2'b10) ? (cmd[7:0]) : (low_bits); 
 
 ////////////////////////////
 // Infer state flop next //
 //////////////////////////
 always_ff @(posedge clk or negedge rst_n) begin
-	if (!rst_n)
+	if (!rst_n) begin
 		state <= IDLE;
-	else
-	state <= nxt_state;
+	end else begin
+		state <= nxt_state;
+	end 
 end
 
 
