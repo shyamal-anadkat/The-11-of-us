@@ -1,0 +1,31 @@
+{C:/Users/zosta/Desktop/The-11-of-us/Exercise17 (A2D Interface)-Shyamal/SPI_ADC128S.sv} {1 {vlog -work work -sv -stats=none {C:/Users/zosta/Desktop/The-11-of-us/Exercise17 (A2D Interface)-Shyamal/SPI_ADC128S.sv}
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module SPI_ADC128S
+
+Top level modules:
+	SPI_ADC128S
+
+} {} {}} {C:/Users/zosta/Desktop/The-11-of-us/Exercise17 (A2D Interface)-Shyamal/SPI_mstr16_tb.sv} {2 {vlog -work work -sv -stats=none {C:/Users/zosta/Desktop/The-11-of-us/Exercise17 (A2D Interface)-Shyamal/SPI_mstr16_tb.sv}
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module SPI_mstr16_tb
+** Warning: C:/Users/zosta/Desktop/The-11-of-us/Exercise17 (A2D Interface)-Shyamal/SPI_mstr16_tb.sv(82): (vlog-2643) Unterminated string literal continues onto next line.
+
+
+Top level modules:
+	SPI_mstr16_tb
+
+} {} {}} {C:/Users/zosta/Desktop/The-11-of-us/Exercise17 (A2D Interface)-Shyamal/ADC128S.sv} {1 {vlog -work work -sv -stats=none {C:/Users/zosta/Desktop/The-11-of-us/Exercise17 (A2D Interface)-Shyamal/ADC128S.sv}
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module ADC128S
+
+Top level modules:
+	ADC128S
+
+} {} {}} {C:/Users/zosta/Desktop/The-11-of-us/Exercise17 (A2D Interface)-Shyamal/SPI_mstr16.sv} {1 {vlog -work work -sv -stats=none {C:/Users/zosta/Desktop/The-11-of-us/Exercise17 (A2D Interface)-Shyamal/SPI_mstr16.sv}
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module SPI_mstr16
+
+Top level modules:
+	SPI_mstr16
+
+} {} {}}

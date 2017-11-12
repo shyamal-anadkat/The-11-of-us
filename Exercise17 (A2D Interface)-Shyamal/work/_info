@@ -1,0 +1,160 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/Users/zosta/OneDrive/ECE551/HW5
+vA2D_intf
+Z0 DXx6 sv_std 3 std 0 22 WmjPaeP=7F5?QFXzJ>D[Q2
+Z1 !s110 1510519290
+!i10b 1
+!s100 LNHM>dj?NiCklU[_@VZ4;2
+IIn9;6CU8^7CkX?HP?GQR32
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+!s105 A2D_intf_sv_unit
+S1
+Z3 dC:/Users/zosta/Desktop/The-11-of-us/Exercise17 (A2D Interface)-Shyamal
+w1510519286
+8C:/Users/zosta/Desktop/The-11-of-us/Exercise17 (A2D Interface)-Shyamal/A2D_intf.sv
+FC:/Users/zosta/Desktop/The-11-of-us/Exercise17 (A2D Interface)-Shyamal/A2D_intf.sv
+L0 1
+Z4 OP;L;10.4a;61
+r1
+!s85 0
+31
+Z5 !s108 1510519290.000000
+!s107 C:/Users/zosta/Desktop/The-11-of-us/Exercise17 (A2D Interface)-Shyamal/A2D_intf.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/zosta/Desktop/The-11-of-us/Exercise17 (A2D Interface)-Shyamal/A2D_intf.sv|
+!s101 -O0
+!i113 1
+Z6 o-work work -sv -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact -O0
+n@a2@d_intf
+vA2D_intf_tb
+R0
+Z7 !s110 1510519291
+!i10b 1
+!s100 ]F9B0HhZ<SWGC6[@T<UW@2
+IYPc4I[1OIE2EOzcHA2XFa1
+R2
+!s105 A2D_intf_tb_sv_unit
+S1
+R3
+w1510519221
+8C:/Users/zosta/Desktop/The-11-of-us/Exercise17 (A2D Interface)-Shyamal/A2D_intf_tb.sv
+FC:/Users/zosta/Desktop/The-11-of-us/Exercise17 (A2D Interface)-Shyamal/A2D_intf_tb.sv
+L0 1
+R4
+r1
+!s85 0
+31
+Z8 !s108 1510519291.000000
+!s107 C:/Users/zosta/Desktop/The-11-of-us/Exercise17 (A2D Interface)-Shyamal/A2D_intf_tb.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/zosta/Desktop/The-11-of-us/Exercise17 (A2D Interface)-Shyamal/A2D_intf_tb.sv|
+!s101 -O0
+!i113 1
+R6
+n@a2@d_intf_tb
+vADC128S
+R0
+R7
+!i10b 1
+!s100 0damBXUWz_8:HCk]^=0]c2
+INST[ee;O8dJB2g;h0kSYQ3
+R2
+!s105 ADC128S_sv_unit
+S1
+R3
+Z9 w1510328971
+8C:/Users/zosta/Desktop/The-11-of-us/Exercise17 (A2D Interface)-Shyamal/ADC128S.sv
+FC:/Users/zosta/Desktop/The-11-of-us/Exercise17 (A2D Interface)-Shyamal/ADC128S.sv
+L0 1
+R4
+r1
+!s85 0
+31
+R8
+!s107 C:/Users/zosta/Desktop/The-11-of-us/Exercise17 (A2D Interface)-Shyamal/ADC128S.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/zosta/Desktop/The-11-of-us/Exercise17 (A2D Interface)-Shyamal/ADC128S.sv|
+!s101 -O0
+!i113 1
+R6
+n@a@d@c128@s
+vSPI_ADC128S
+R0
+R7
+!i10b 1
+!s100 ;E62=i88@ghW83DU@9;CK1
+I@0gK5M<kLSz23<Fd@A5Hg2
+R2
+!s105 SPI_ADC128S_sv_unit
+S1
+R3
+R9
+8C:/Users/zosta/Desktop/The-11-of-us/Exercise17 (A2D Interface)-Shyamal/SPI_ADC128S.sv
+FC:/Users/zosta/Desktop/The-11-of-us/Exercise17 (A2D Interface)-Shyamal/SPI_ADC128S.sv
+L0 1
+R4
+r1
+!s85 0
+31
+R8
+!s107 C:/Users/zosta/Desktop/The-11-of-us/Exercise17 (A2D Interface)-Shyamal/SPI_ADC128S.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/zosta/Desktop/The-11-of-us/Exercise17 (A2D Interface)-Shyamal/SPI_ADC128S.sv|
+!s101 -O0
+!i113 1
+R6
+n@s@p@i_@a@d@c128@s
+vSPI_mstr16
+R0
+R7
+!i10b 1
+!s100 kPKMnb`Rhg]`7BQ2;cQ^z1
+IgGKd4a04eQmmG]>5k>]UP1
+R2
+!s105 SPI_mstr16_sv_unit
+S1
+R3
+w1510098048
+8C:/Users/zosta/Desktop/The-11-of-us/Exercise17 (A2D Interface)-Shyamal/SPI_mstr16.sv
+FC:/Users/zosta/Desktop/The-11-of-us/Exercise17 (A2D Interface)-Shyamal/SPI_mstr16.sv
+L0 6
+R4
+r1
+!s85 0
+31
+R8
+!s107 C:/Users/zosta/Desktop/The-11-of-us/Exercise17 (A2D Interface)-Shyamal/SPI_mstr16.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/zosta/Desktop/The-11-of-us/Exercise17 (A2D Interface)-Shyamal/SPI_mstr16.sv|
+!s101 -O0
+!i113 1
+R6
+n@s@p@i_mstr16
+vSPI_mstr16_tb
+R0
+R1
+!i10b 1
+!s100 MdTDWN[fbjZ5F81RVo>dN2
+ISeDE5HmB;JVX6G`9kA9kI1
+R2
+!s105 SPI_mstr16_tb_sv_unit
+S1
+R3
+w1510098265
+8C:/Users/zosta/Desktop/The-11-of-us/Exercise17 (A2D Interface)-Shyamal/SPI_mstr16_tb.sv
+FC:/Users/zosta/Desktop/The-11-of-us/Exercise17 (A2D Interface)-Shyamal/SPI_mstr16_tb.sv
+L0 6
+R4
+r1
+!s85 0
+31
+R5
+!s107 C:/Users/zosta/Desktop/The-11-of-us/Exercise17 (A2D Interface)-Shyamal/SPI_mstr16_tb.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/zosta/Desktop/The-11-of-us/Exercise17 (A2D Interface)-Shyamal/SPI_mstr16_tb.sv|
+!s101 -O0
+!i113 1
+R6
+n@s@p@i_mstr16_tb
