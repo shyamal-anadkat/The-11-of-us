@@ -76,6 +76,7 @@ always_comb begin
       end
     WAIT2:
       begin
+        next_state = WAIT2;
         if (rdy) begin
           next_state = WAIT3;
           assert_mux_2 = 1'b1;
@@ -84,6 +85,7 @@ always_comb begin
       end
     WAIT3:
       begin
+	next_state = WAIT3;
         if (rdy) begin
           next_state = WAIT1;
           clr_rdy = 1'b1;
