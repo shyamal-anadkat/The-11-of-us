@@ -27,7 +27,7 @@ always_ff@(posedge clk, negedge rst_n) begin
   end else begin
     if (assert_mux_1)
       data_ff1 <= curr_data;
-    if (assert_mux_2)
+    else if (assert_mux_2)
       data_ff2 <= curr_data;
   end
 end
