@@ -1,4 +1,4 @@
-module cmd_cfg (d_ptch, d_roll, d_yaw, resp, send_resp, clr_cmd_rdy, strt_cal, inertial_cal,
+module cmd_cfg (d_ptch, d_roll, d_yaw, thrst, resp, send_resp, clr_cmd_rdy, strt_cal, inertial_cal,
 			    motors_off, strt_cnv, data, cmd, batt, cal_done, cnv_cmplt, cmd_rdy, clk, rst_n);
 
 output logic signed [15:0] d_ptch, d_roll, d_yaw;
