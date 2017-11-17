@@ -135,6 +135,7 @@ always_comb begin
 					
 					CALIBRATE: begin // clr_cmd_rdy, clr_tmr, en_mtrs
 						clr_cmd_rdy = 1'b1;
+						clr_tmr = 1'b0;
 						next = WAIT;
 					end
 					
@@ -150,6 +151,8 @@ always_comb begin
 					end
 				endcase
 			end
+			else
+				next = IDLE;
 		end
 		
 		HOLD_MOTORS_OFF: begin // not too sure if we need to check cmd_rdy
@@ -162,10 +165,14 @@ always_comb begin
 		end
 		
 		SET_BATT: begin // cnv_cmplt
-			resp = batt;
-			clr_cmd_rdy = 1'b1;
-			send_resp = 1'b1;
-			next = IDLE;
+			if (cnv_cmplt) begin
+				resp = batt;
+				clr_cmd_rdy = 1'b1;
+				send_resp = 1'b1;
+				next = IDLE;
+			end
+			else
+				next = SET_BATT;
 		end
 		
 		POS_ACK: begin
@@ -176,6 +183,7 @@ always_comb begin
 		end
 		
 		WAIT: begin
+			clr_tmr = 1'b0;
 			if (&mtr_ramp_tmr)
 				next = CALIBRATE_QUAD;
 			else
