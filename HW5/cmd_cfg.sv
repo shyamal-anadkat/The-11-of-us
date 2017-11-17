@@ -60,6 +60,8 @@ always_ff @(posedge clk, negedge rst_n)
 always_ff @(posedge clk, negedge rst_n)
 	if (!rst_n)
 		d_roll <= 16'h0000;
+	else if (emer_land)
+		d_roll <= 16'h0000;
 	else if (wrt_roll)
 		d_roll <= $signed(data);
 		
