@@ -45,7 +45,7 @@ UART uartmod
 	.rst_n(rst_n),
 	.RX(RX),.TX(TX),
 	.rx_rdy(resp_rdy),
-	.clr_rx_rdy(),
+	.clr_rx_rdy(clr_cmplt),
 	.rx_data(resp),
 	.trmt(trmt),
 	.tx_data(tx_data),
@@ -124,7 +124,6 @@ always_comb begin
 			end else begin 
 				nxt_state = WAITH;
 				sel = 2'b10;
-				clr_cmplt = 1;
 			end
 		end
 
@@ -135,7 +134,6 @@ always_comb begin
 				nxt_state = WAITL;
 			end else begin
 				sel = 2'b01;
-				clr_cmplt = 1;
 				nxt_state = WAITM;
 			end
 
@@ -147,7 +145,6 @@ always_comb begin
 			nxt_state = IDLE;
 		end else begin
 			nxt_state = WAITL;
-			clr_cmplt = 1;
 			sel = 2'b00;
 		end
 	end
