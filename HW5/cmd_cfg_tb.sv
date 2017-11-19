@@ -106,6 +106,7 @@ always begin
 		@(posedge send_resp);
 		
 	end
+	$stop();
 end
 
 
