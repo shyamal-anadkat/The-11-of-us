@@ -1,10 +1,10 @@
 module UART_wrapper(clk, rst_n, RX, TX, cmd, data, cmd_rdy, snd_resp, resp_sent, resp, clr_cmd_rdy);
-input clk, rst_n, TX, RX, snd_resp, clr_cmd_rdy;
+input clk, rst_n, RX, snd_resp, clr_cmd_rdy;
 input [7:0] resp;
-wire clr_cmd_rdy, snd_resp, resp_sent;
+wire clr_cmd_rdy, resp_sent;
 output [15:0] data;
 output [7:0] cmd;
-output resp_sent;
+output resp_sent, TX;
 output reg cmd_rdy;
 reg assert_mux_1, assert_mux_2;
 wire [7:0] curr_data;
