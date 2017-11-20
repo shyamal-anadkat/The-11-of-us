@@ -6,15 +6,15 @@ output reg [63:0] accum;
 
 reg [15:0] prod_reg;
 reg en_stg2;
-logic gclk2, clk_en_lat;
+logic gclk2, gclk1, clk_en_lat;
 
 ///////////////////////////////////////////
 // Generate and flop product if enabled //
 /////////////////////////////////////////
-always_ff @(posedge gclk2) 
+always_ff @(posedge gclk1) 
       prod_reg <= A*B;
 
-assign gclk2 = clk & clk_en_lat;
+assign gclk1 = clk & clk_en_lat;
 
 always @(clk, en) begin
 	if(!clk)	
@@ -27,10 +27,15 @@ end
 always_ff @(posedge clk)
     en_stg2 <= en;
 
+always @(gclk1, en_stg2) begin
+	if(!gclk1)	
+		gclk2 <= en_stg2;
+end
+
 always_ff @(posedge gclk2)
-    if (clr)
+    if (clr | en_stg2)
       accum <= 64'h0000000000000000;
-    else if (clk & clk_en_lat)
+    else
       accum <= accum + prod_reg;
 
 endmodule

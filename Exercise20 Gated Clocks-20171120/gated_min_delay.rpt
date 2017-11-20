@@ -6,15 +6,15 @@ Report : timing
         -max_paths 1
 Design : mult_accum_gated
 Version: M-2016.12
-Date   : Mon Nov 20 10:51:02 2017
+Date   : Mon Nov 20 11:05:34 2017
 ****************************************
 
 Operating Conditions: NCCOM   Library: tcbn40lpbwptc
 Wire Load Model Mode: segmented
 
-  Startpoint: en (input port clocked by clk)
-  Endpoint: clk_en_lat_reg
-            (negative level-sensitive latch clocked by clk)
+  Startpoint: en_stg2_reg
+              (rising edge-triggered flip-flop clocked by clk)
+  Endpoint: gclk2_reg (positive level-sensitive latch clocked by clk')
   Path Group: clk
   Path Type: min
 
@@ -27,21 +27,21 @@ Wire Load Model Mode: segmented
   -----------------------------------------------------------
   clock clk (rise edge)                    2.50       2.50
   clock network delay (ideal)              0.00       2.50
-  input external delay                     0.75       3.25 f
-  en (in)                                  0.01       3.26 f
-  clk_en_lat_reg/D (LNQD1BWP)              0.00       3.26 f
-  data arrival time                                   3.26
+  en_stg2_reg/CP (DFQD1BWP)                0.00       2.50 r
+  en_stg2_reg/Q (DFQD1BWP)                 0.10       2.60 r
+  gclk2_reg/D (LHQD1BWP)                   0.00       2.60 r
+  data arrival time                                   2.60
 
-  clock clk (rise edge)                    2.50       2.50
+  clock clk' (fall edge)                   2.50       2.50
   clock network delay (ideal)              0.00       2.50
-  clk_en_lat_reg/EN (LNQD1BWP)             0.00       2.50 r
-  library hold time                       -0.03       2.47
-  data required time                                  2.47
+  gclk2_reg/E (LHQD1BWP)                   0.00       2.50 f
+  library hold time                        0.00       2.50
+  data required time                                  2.50
   -----------------------------------------------------------
-  data required time                                  2.47
-  data arrival time                                  -3.26
+  data required time                                  2.50
+  data arrival time                                  -2.60
   -----------------------------------------------------------
-  slack (MET)                                         0.79
+  slack (MET)                                         0.10
 
 
 1

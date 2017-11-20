@@ -25,7 +25,7 @@ Report : power
         -analysis_effort low
 Design : mult_accum_gated
 Version: M-2016.12
-Date   : Mon Nov 20 10:51:05 2017
+Date   : Mon Nov 20 11:05:39 2017
 ****************************************
 
 
@@ -52,12 +52,12 @@ Power-specific unit information :
     Leakage Power Units = 1nW
 
 
-  Cell Internal Power  =  40.9240 uW   (63%)
-  Net Switching Power  =  24.0384 uW   (37%)
+  Cell Internal Power  =  45.2684 uW   (71%)
+  Net Switching Power  =  18.4703 uW   (29%)
                          ---------
-Total Dynamic Power    =  64.9624 uW  (100%)
+Total Dynamic Power    =  63.7387 uW  (100%)
 
-Cell Leakage Power     =  63.0280 nW
+Cell Leakage Power     = 129.2855 nW
 
 
                  Internal         Switching           Leakage            Total
@@ -66,10 +66,10 @@ Power Group      Power            Power               Power              Power  
 io_pad             0.0000            0.0000            0.0000            0.0000  (   0.00%)
 memory             0.0000            0.0000            0.0000            0.0000  (   0.00%)
 black_box          0.0000            0.0000            0.0000            0.0000  (   0.00%)
-clock_network  7.1463e-04        2.0952e-02            0.2002        2.1667e-02  (  33.32%)
-register       3.9002e-02        2.3735e-05           25.7561        3.9052e-02  (  60.06%)
-sequential         0.0000            0.0000            0.0000            0.0000  (   0.00%)
-combinational  1.2073e-03        3.0625e-03           37.0637        4.3069e-03  (   6.62%)
+clock_network  2.5346e-04        3.4831e-03            0.1282        3.7367e-03  (   5.85%)
+register       1.4578e-02        3.8940e-04            6.1974        1.4974e-02  (  23.44%)
+sequential     6.7360e-03            0.0000           20.8589        6.7569e-03  (  10.58%)
+combinational  2.3701e-02        1.4598e-02          102.1010        3.8401e-02  (  60.13%)
 --------------------------------------------------------------------------------------------------
-Total          4.0924e-02 mW     2.4038e-02 mW        63.0200 nW     6.5025e-02 mW
+Total          4.5268e-02 mW     1.8470e-02 mW       129.2855 nW     6.3868e-02 mW
 1
