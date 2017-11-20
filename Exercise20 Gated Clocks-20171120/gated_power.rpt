@@ -1,0 +1,75 @@
+Information: Propagating switching activity (low effort zero delay simulation). (PWR-6)
+Warning: The net 'B[0]' is only annotated with a static probability value. A default toggle rate value of 0.040000 is used. (PWR-417)
+Warning: Design has unannotated primary inputs. (PWR-414)
+Warning: The net 'B[1]' is only annotated with a static probability value. A default toggle rate value of 0.040000 is used. (PWR-417)
+Warning: The net 'B[2]' is only annotated with a static probability value. A default toggle rate value of 0.040000 is used. (PWR-417)
+Warning: The net 'B[3]' is only annotated with a static probability value. A default toggle rate value of 0.040000 is used. (PWR-417)
+Warning: The net 'B[4]' is only annotated with a static probability value. A default toggle rate value of 0.040000 is used. (PWR-417)
+Warning: The net 'B[5]' is only annotated with a static probability value. A default toggle rate value of 0.040000 is used. (PWR-417)
+Warning: The net 'B[6]' is only annotated with a static probability value. A default toggle rate value of 0.040000 is used. (PWR-417)
+Warning: The net 'B[7]' is only annotated with a static probability value. A default toggle rate value of 0.040000 is used. (PWR-417)
+Warning: The net 'A[0]' is only annotated with a static probability value. A default toggle rate value of 0.040000 is used. (PWR-417)
+Warning: The net 'A[1]' is only annotated with a static probability value. A default toggle rate value of 0.040000 is used. (PWR-417)
+Warning: The net 'A[2]' is only annotated with a static probability value. A default toggle rate value of 0.040000 is used. (PWR-417)
+Warning: The net 'A[3]' is only annotated with a static probability value. A default toggle rate value of 0.040000 is used. (PWR-417)
+Warning: The net 'A[4]' is only annotated with a static probability value. A default toggle rate value of 0.040000 is used. (PWR-417)
+Warning: The net 'A[5]' is only annotated with a static probability value. A default toggle rate value of 0.040000 is used. (PWR-417)
+Warning: The net 'A[6]' is only annotated with a static probability value. A default toggle rate value of 0.040000 is used. (PWR-417)
+Warning: The net 'A[7]' is only annotated with a static probability value. A default toggle rate value of 0.040000 is used. (PWR-417)
+Warning: The net 'en' is only annotated with a static probability value. A default toggle rate value of 0.040000 is used. (PWR-417)
+Warning: The net 'clr' is only annotated with a static probability value. A default toggle rate value of 0.040000 is used. (PWR-417)
+Warning: Design has unannotated sequential cell outputs. (PWR-415)
+ 
+****************************************
+Report : power
+        -analysis_effort low
+Design : mult_accum_gated
+Version: M-2016.12
+Date   : Mon Nov 20 10:51:05 2017
+****************************************
+
+
+Library(s) Used:
+
+    tcbn40lpbwptc (File: /cae/apps/data/tsmclibs-2013/digital/Front_End/timing_power_noise/NLDM/tcbn40lpbwp_120b/tcbn40lpbwptc.db)
+
+
+Operating Conditions: NCCOM   Library: tcbn40lpbwptc
+Wire Load Model Mode: segmented
+
+Design        Wire Load Model            Library
+------------------------------------------------
+mult_accum_gated       TSMC32K_Lowk_Conservative
+                                         tcbn40lpbwptc
+
+
+Global Operating Voltage = 1.1  
+Power-specific unit information :
+    Voltage Units = 1V
+    Capacitance Units = 1.000000pf
+    Time Units = 1ns
+    Dynamic Power Units = 1mW    (derived from V,C,T units)
+    Leakage Power Units = 1nW
+
+
+  Cell Internal Power  =  40.9240 uW   (63%)
+  Net Switching Power  =  24.0384 uW   (37%)
+                         ---------
+Total Dynamic Power    =  64.9624 uW  (100%)
+
+Cell Leakage Power     =  63.0280 nW
+
+
+                 Internal         Switching           Leakage            Total
+Power Group      Power            Power               Power              Power   (   %    )  Attrs
+--------------------------------------------------------------------------------------------------
+io_pad             0.0000            0.0000            0.0000            0.0000  (   0.00%)
+memory             0.0000            0.0000            0.0000            0.0000  (   0.00%)
+black_box          0.0000            0.0000            0.0000            0.0000  (   0.00%)
+clock_network  7.1463e-04        2.0952e-02            0.2002        2.1667e-02  (  33.32%)
+register       3.9002e-02        2.3735e-05           25.7561        3.9052e-02  (  60.06%)
+sequential         0.0000            0.0000            0.0000            0.0000  (   0.00%)
+combinational  1.2073e-03        3.0625e-03           37.0637        4.3069e-03  (   6.62%)
+--------------------------------------------------------------------------------------------------
+Total          4.0924e-02 mW     2.4038e-02 mW        63.0200 nW     6.5025e-02 mW
+1
