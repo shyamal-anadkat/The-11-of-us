@@ -1,0 +1,72 @@
+read_file -format sverilog mult_accum.sv  
+
+###################################
+# Set Current Design to top level #
+###################################
+current_design mult_accum
+
+###########################################
+# Define clock and set don't mess with it #
+###########################################
+create_clock -name "clk" -period 2.5 -waveform { 0 1.25 }  { clk  }
+set_dont_touch_network [find port clk]
+
+# setup pointer that contains all inputs except clock #
+set prim_inputs [remove_from_collection [all_input] [find port clk]]
+
+#########################################
+# Set input delay & drive on all inputs #
+#########################################
+set_input_delay -clock clk 0.75 $prim_inputs 
+set_driving_cell -lib_cell AO33D0BWP -pin Z -from_pin A1 -library tcbn40lpbwptc [copy_collection $prim_inputs]
+
+##########################################################
+# Setting activity factor of inputs for power estimation #
+##########################################################
+set_switching_activity -static_probability 0.25 $prim_inputs
+
+############################################################
+# Set max transition time is important for Hot-E reasons #
+######################################################
+set_max_transition 0.10 [current_design]
+
+##########################################
+# Set output delay & load on all outputs #
+##########################################
+set_output_delay -clock clk 0.75 [all_outputs]
+set_load 0.05 [all_outputs]
+
+#############################################################
+# Wire load model allows it to estimate internal parasitics #
+#############################################################
+set_wire_load_model -name TSMC32K_Lowk_Conservative -library tcbn40lpbwptc 
+
+########################################
+# Now actually synthesize for 1st time #
+########################################
+compile -map_effort medium
+
+check_design
+## design ware components cause extra pins
+
+report_area
+report_timing -path full -delay max
+report_timing -path full -delay min
+
+## smash the hierarchy (design ware component)
+ungroup -all -flatten
+
+set_fix_hold clk
+
+compile -map_effort medium
+
+check_design
+
+report_area
+
+#########################
+# Report power analysis #
+#########################
+report_power
+
+
