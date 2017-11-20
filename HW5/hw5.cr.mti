@@ -5,13 +5,6 @@ Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 
 Top level modules:
 	UART_rcv
 
-} {} {}} C:/Users/zosta/Desktop/The-11-of-us/HW5/cmd_cfg.sv {1 {vlog -work work -sv -stats=none C:/Users/zosta/Desktop/The-11-of-us/HW5/cmd_cfg.sv
-Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
--- Compiling module cmd_cfg
-
-Top level modules:
-	cmd_cfg
-
 } {} {}} C:/Users/zosta/Desktop/The-11-of-us/HW5/UART_tx.v {1 {vlog -work work -stats=none C:/Users/zosta/Desktop/The-11-of-us/HW5/UART_tx.v
 Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
 -- Compiling module UART_tx
@@ -19,41 +12,11 @@ Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 
 Top level modules:
 	UART_tx
 
-} {} {}} C:/Users/zosta/Desktop/The-11-of-us/HW5/SPI_mstr16.sv {1 {vlog -work work -sv -stats=none C:/Users/zosta/Desktop/The-11-of-us/HW5/SPI_mstr16.sv
-Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
--- Compiling module SPI_mstr16
-
-Top level modules:
-	SPI_mstr16
-
-} {} {}} C:/Users/zosta/Desktop/The-11-of-us/HW5/CommMaster.sv {1 {vlog -work work -sv -stats=none C:/Users/zosta/Desktop/The-11-of-us/HW5/CommMaster.sv
-Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
--- Compiling module CommMaster
-
-Top level modules:
-	CommMaster
-
-} {} {}} C:/Users/zosta/Desktop/The-11-of-us/HW5/UART_wrapper.sv {1 {vlog -work work -sv -stats=none C:/Users/zosta/Desktop/The-11-of-us/HW5/UART_wrapper.sv
-Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
--- Compiling module UART_wrapper
-
-Top level modules:
-	UART_wrapper
-
 } {} {}} C:/Users/zosta/Desktop/The-11-of-us/HW5/UART.v {1 {vlog -work work -stats=none C:/Users/zosta/Desktop/The-11-of-us/HW5/UART.v
 Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
 -- Compiling module UART
 
 Top level modules:
 	UART
-
-} {} {}} C:/Users/zosta/Desktop/The-11-of-us/HW5/SPI_mstr16_tb.sv {2 {vlog -work work -sv -stats=none C:/Users/zosta/Desktop/The-11-of-us/HW5/SPI_mstr16_tb.sv
-Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
--- Compiling module SPI_mstr16_tb
-** Warning: C:/Users/zosta/Desktop/The-11-of-us/HW5/SPI_mstr16_tb.sv(83): (vlog-2643) Unterminated string literal continues onto next line.
-
-
-Top level modules:
-	SPI_mstr16_tb
 
 } {} {}}
