@@ -8,7 +8,7 @@ logic done;
 
 A2D_intf intf(.clk(clk),.rst_n(rst_n), .strt_cnv(strt_cnv),.chnnl(chnnl),
          .cnv_cmplt(cnv_cmplt),.res(res),.SS_n(a2d_SS_n),.SCLK(SCLK),
-         .MOSI(MOSI),.MISO(MISO),.done(done));
+         .MOSI(MOSI),.MISO(MISO));
 
 ADC128S adc(.clk(clk),.rst_n(rst_n),.SS_n(a2d_SS_n),.SCLK(SCLK),.MOSI(MOSI),.MISO(MISO));
 
