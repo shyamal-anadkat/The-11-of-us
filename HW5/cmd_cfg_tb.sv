@@ -142,6 +142,17 @@ always begin
 		@(posedge clk);
 		@(posedge clk);
 		snd_cmd_stim = 1'b0;
+		if (i == 7) begin
+		    @(posedge resp_rdy);
+			cmd_stim = 8'h06;
+			snd_cmd_stim = 1;
+			@(posedge clk);
+			snd_cmd_stim = 0;
+			@(posedge cmd_rdy);
+			@(posedge clk);
+			@(posedge clk);
+			snd_cmd_stim = 1'b0;
+		end
 		if (i == 0) begin
 			// model ADC
 			cnv_cmplt = 1'b1;
@@ -155,7 +166,7 @@ always begin
 				$stop();
 			end
 		end
-		if (i == 5)
+		if (i == 5 || i == 7)
 			cal_done = 1'b1;
 		@(posedge resp_rdy); // change to frm_snt if you want this to fully finish
 	end
