@@ -1,9 +1,9 @@
-read_file -format sverilog mult_accum.sv  
+read_file -format sverilog mult_accum_gated.sv  
 
 ###################################
 # Set Current Design to top level #
 ###################################
-current_design mult_accum
+current_design mult_accum_gated
 
 ###########################################
 # Define clock and set don't mess with it #
@@ -50,8 +50,8 @@ check_design
 ## design ware components cause extra pins
 
 report_area
-report_timing -path full -delay max
-report_timing -path full -delay min
+report_timing -path full -delay max > gated_max_delay.rpt
+report_timing -path full -delay min > gated_min_delay.rpt
 
 ## smash the hierarchy (design ware component)
 ungroup -all -flatten
@@ -62,11 +62,11 @@ compile -map_effort medium
 
 check_design
 
-report_area
+report_area > gated_area.rpt
 
 #########################
 # Report power analysis #
 #########################
-report_power
+report_power > gated_power.rpt
 
 
