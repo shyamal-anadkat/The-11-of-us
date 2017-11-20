@@ -1,3 +1,8 @@
+/*
+* A2D_Intf Module ECE 551 
+* Eric Heinz, Shyamal Anadkat, Sanjay Rajmohan 
+*
+*/
 module A2D_intf (cnv_cmplt, res, SS_n, strt_cnv, chnnl,  SCLK, MOSI, MISO, clk, rst_n);
 
 ///////////////////////////////////////////////
