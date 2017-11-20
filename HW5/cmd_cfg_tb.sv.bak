@@ -231,7 +231,6 @@ always begin
 	// test if start_cal is held high for one cycle
 	@(posedge strt_cal);
 	@(posedge clk);
-	@(negedge clk);
 	if (strt_cal) begin
 		$display("start_cal should only be high for one clk cycle");
 		$stop();

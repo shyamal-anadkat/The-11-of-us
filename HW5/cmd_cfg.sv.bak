@@ -23,7 +23,7 @@ input cal_done, cnv_cmplt, cmd_rdy, clk, rst_n;
 
 
 /// timer width parameter (will be changed to 26 for real quad) ///
-parameter TIMER_WIDTH = 26;
+parameter TIMER_WIDTH = 9;
 
 
 ///////////////////////////////////////////////
