@@ -28,16 +28,16 @@ logic clr_tmr;
 logic wrt_ptch, wrt_roll, wrt_yaw, wrt_thrst, emer_land;
 logic en_mtrs, mtrs_off;
 
-typedef enum logic [2:0] { IDLE, HOLD_MOTORS_OFF, SET_BATT, POS_ACK, WAIT, CALIBRATE_QUAD } state_t;
+typedef enum logic [2:0] { IDLE, SET_BATT, POS_ACK, WAIT, CALIBRATE_QUAD } state_t;
 state_t state, next;
 
 // motors_off flop
 always_ff @(posedge clk, negedge rst_n)
 	if (!rst_n)
 		motors_off <= 1'b1;
-	else if (en_mtrs)
-		motors_off <= 1'b0;
 	else if (mtrs_off)
+		motors_off <= 1'b0;
+	else if (en_mtrs)
 		motors_off <= 1'b1;
 
 // wait timer flop
@@ -102,7 +102,7 @@ always_comb begin
 	strt_cnv = 1'b0;
 	clr_tmr = 1'b1;
 	mtrs_off = 1'b0;
-	en_mtrs = 1'b1;
+	en_mtrs = 1'b0;
 	clr_cmd_rdy = 1'b0;
 	send_resp = 1'b0;
 	strt_cal = 1'b0;
@@ -140,6 +140,7 @@ always_comb begin
 					CALIBRATE: begin // clr_cmd_rdy, clr_tmr, en_mtrs
 						clr_cmd_rdy = 1'b1;
 						clr_tmr = 1'b0;
+						en_mtrs = 1'b1;
 						next = WAIT;
 					end
 					
@@ -150,22 +151,12 @@ always_comb begin
 					
 					MTRS_OFF: begin
 						mtrs_off = 1'b1;
-						en_mtrs = 1'b0;
-						next = HOLD_MOTORS_OFF;
+						next = POS_ACK;
 					end
 				endcase
 			end
 			else
 				next = IDLE;
-		end
-		
-		HOLD_MOTORS_OFF: begin // not too sure if we need to check cmd_rdy
-			if (cmd == CALIBRATE)
-				next = POS_ACK;
-			else
-				next = HOLD_MOTORS_OFF;
-			mtrs_off = 1'b1;
-			en_mtrs = 1'b0;
 		end
 		
 		SET_BATT: begin // cnv_cmplt
@@ -188,6 +179,7 @@ always_comb begin
 		
 		WAIT: begin
 			clr_tmr = 1'b0;
+			en_mtrs = 1'b1;
 			if (&mtr_ramp_tmr)
 				next = CALIBRATE_QUAD;
 			else
