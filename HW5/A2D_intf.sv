@@ -110,11 +110,11 @@ end
       	//// read result of A2D back with new transaction////
       	DONE:begin 
       		if(done) begin
-            wrt = 1'b0;
-            nxt_state = IDLE;
-            set_cmplt = 1'b1;
+      			wrt = 1'b0;
+      			nxt_state = IDLE;
+      			set_cmplt = 1'b1;
           end else begin
-           nxt_state = DONE;
+      			nxt_state = DONE;
          end
        end 
        default: 

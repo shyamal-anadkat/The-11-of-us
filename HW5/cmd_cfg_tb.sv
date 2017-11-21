@@ -15,6 +15,8 @@ logic [8:0] thrst;
 logic [7:0] resp_commMaster;
 logic motors_off, strt_cnv, inertial_cal;
 logic RX_TX, TX_RX;
+reg [7:0] commands [7:0];
+reg [15:0] data [7:0];
 
 //// command encodings ////
 localparam REQ_BATT 	= 8'h01;
@@ -54,6 +56,7 @@ UART_wrapper UART_wrapper_iDUT(
 	.clr_cmd_rdy(clr_cmd_rdy));
 
 //// cmd_cfg unit instantiation ////
+// override timing width param with 9
 cmd_cfg #(9) cmd_cfgiDUT (
 	.d_ptch(d_ptch), .d_roll(d_roll),  .d_yaw(d_yaw), 
 	.thrst (thrst),
@@ -71,9 +74,7 @@ cmd_cfg #(9) cmd_cfgiDUT (
 	.cnv_cmplt(cnv_cmplt), 
 	.cmd_rdy(cmd_rdy), .clk(clk), .rst_n(rst_n));
 
-reg [7:0] commands [7:0];
-reg [15:0] data [7:0];
-
+// initialize commands and values to test cmd_cfg
 initial begin
 	clk = 0;
 	rst_n = 0;
@@ -122,6 +123,7 @@ end
 always
 	#10 clk = ~clk;
 
+// begin tests
 always begin
 	@(posedge clk);
 	@(negedge clk);
@@ -134,11 +136,10 @@ always begin
 	data_stim = data[0];
 	snd_cmd_stim = 1;
 	@(posedge clk);
-	snd_cmd_stim = 0;
+	snd_cmd_stim = 0;       // assert snd_cmd_stim for 1 cycle
 	@(posedge cmd_rdy);
 	repeat(2)@(posedge clk);
-	// model ADC
-	cnv_cmplt = 1'b1;
+	cnv_cmplt = 1'b1;       // model ADC
 	if (resp != batt) begin
 		$display("Resp should be battery level");
 		$stop();
@@ -151,18 +152,20 @@ always begin
 	data_stim = data[1];
 	snd_cmd_stim = 1;
 	@(posedge clk);
-	snd_cmd_stim = 0;
+	snd_cmd_stim = 0;       // assert snd_cmd_stim for 1 cycle
 	@(posedge cmd_rdy);
 	repeat(2)@(posedge clk);
+    // see if value is set to expected value
 	if (d_ptch != data[1]) begin
 		$display("d_ptch set incorrectly");
 		$stop();
 	end
+    // the response should be an ack
 	if (resp != ACK) begin
 		$display("Resp should be an ack");
 		$stop();
 	end
-	@(posedge resp_rdy);
+	@(posedge resp_rdy);    // wait for CommMaster to be ready
 	////////////////////////////////////
 	//         D_ROLL  CMD TEST       //
 	////////////////////////////////////
@@ -170,18 +173,20 @@ always begin
 	data_stim = data[2];
 	snd_cmd_stim = 1;
 	@(posedge clk);
-	snd_cmd_stim = 0;
+	snd_cmd_stim = 0;       // assert snd_cmd_stim for 1 cycle
 	@(posedge cmd_rdy);
 	repeat(2)@(posedge clk);
+    // see if value is set to expected value
 	if (d_roll != data[2]) begin
 		$display("d_roll set incorrectly");
 		$stop();
 	end
+    // the response should be an ack
 	if (resp != ACK) begin
 		$display("Resp should be an ack");
 		$stop();
 	end
-	@(posedge resp_rdy);
+	@(posedge resp_rdy);    // wait for CommMaster to be ready
 	////////////////////////////////////
 	//         D_YAW   CMD TEST       //
 	////////////////////////////////////
@@ -189,18 +194,20 @@ always begin
 	data_stim = data[3];
 	snd_cmd_stim = 1;
 	@(posedge clk);
-	snd_cmd_stim = 0;
+	snd_cmd_stim = 0;       // assert snd_cmd_stim for 1 cycle
 	@(posedge cmd_rdy);
 	repeat(2)@(posedge clk);
+    // see if value is set to expected value
 	if (d_yaw != data[3]) begin
 		$display("d_yaw set incorrectly");
 		$stop();
 	end
+    // the response should be an ack
 	if (resp != ACK) begin
 		$display("Resp should be an ack");
 		$stop();
 	end
-	@(posedge resp_rdy);
+	@(posedge resp_rdy);    // wait for CommMaster to be ready
 	////////////////////////////////////
 	//         THRST   CMD TEST       //
 	////////////////////////////////////
@@ -208,18 +215,20 @@ always begin
 	data_stim = data[4];
 	snd_cmd_stim = 1;
 	@(posedge clk);
-	snd_cmd_stim = 0;
+	snd_cmd_stim = 0;       // assert snd_cmd_stim for 1 cycle
 	@(posedge cmd_rdy);
 	repeat(2)@(posedge clk);
+    // see if value is set to expected value
 	if (thrst != data[4]) begin
 		$display("thrst set incorrectly");
 		$stop();
 	end
+    // the response should be an ack
 	if (resp != ACK) begin
 		$display("Resp should be an ack");
 		$stop();
 	end
-	@(posedge resp_rdy);
+	@(posedge resp_rdy);    // wait for CommMaster to be ready
 	////////////////////////////////////
 	//       CALIBRATE CMD TEST       //
 	////////////////////////////////////
@@ -227,26 +236,29 @@ always begin
 	data_stim = data[5];
 	snd_cmd_stim = 1;
 	@(posedge clk);
-	snd_cmd_stim = 0;
+	snd_cmd_stim = 0;       // assert snd_cmd_stim for 1 cycle
 	// test if start_cal is held high for one cycle
 	@(posedge strt_cal);
 	@(posedge clk);
 	@(negedge clk);
+    // strt_cal should be a pulse
 	if (strt_cal) begin
 		$display("start_cal should only be high for one clk cycle");
 		$stop();
 	end
 	@(posedge clk);
+    // intertial_cal should be asserted when calibrating
 	if (!inertial_cal) begin
 		$display("calibrate incorrect");
 		$stop();
 	end
+    // the response should be an ack
 	if (resp != ACK) begin
 		$display("Resp should be an ack");
 		$stop();
 	end
 	cal_done = 1'b1;
-	@(posedge resp_rdy);
+	@(posedge resp_rdy);    // wait for CommMaster to be ready
 	////////////////////////////////////
 	//       EMERGENCY CMD TEST       //
 	////////////////////////////////////
@@ -254,18 +266,20 @@ always begin
 	data_stim = data[6];
 	snd_cmd_stim = 1;
 	@(posedge clk);
-	snd_cmd_stim = 0;
+	snd_cmd_stim = 0;       // assert snd_cmd_stim for 1 cycle
 	@(posedge cmd_rdy);
 	repeat(2)@(posedge clk);
+    // flight values should all be zero
 	if (d_yaw != 0 || d_roll != 0 || d_ptch != 0 || thrst != 0) begin
 		$display("Emergency command incorrect");
 		$stop();
 	end
+    // the response should be an ack
 	if (resp != ACK) begin
 		$display("Resp should be an ack");
 		$stop();
 	end
-	@(posedge resp_rdy);
+	@(posedge resp_rdy);    // wait for CommMaster to be ready
 	////////////////////////////////////
 	//      MOTORS OFF CMD TEST       //
 	////////////////////////////////////
@@ -273,9 +287,10 @@ always begin
 	cmd_stim = 8'h06;
 	snd_cmd_stim = 1;
 	@(posedge clk);
-	snd_cmd_stim = 0;
+	snd_cmd_stim = 0;       // assert snd_cmd_stim for 1 cycle
 	@(posedge cmd_rdy);
 	repeat(2)@(posedge clk);
+    // motors_off should be asserted
 	if (!motors_off) begin
 		$display("Motors should be off");
 		$stop();
@@ -283,6 +298,7 @@ always begin
 	snd_cmd_stim = 1'b0;
 	cal_done = 1'b1;
 	@(posedge resp_rdy);
+
 	$display("Tests passed");
 	$stop();
 end

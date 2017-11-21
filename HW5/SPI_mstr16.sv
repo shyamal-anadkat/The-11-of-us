@@ -74,7 +74,7 @@ end
 assign SCLK = sclk_div[4];
 
 
-//// Implement set_done/clr_done flop ////
+//// done flop ////
 always_ff @(posedge clk, negedge rst_n) begin
 	if(!rst_n)
 		done <= 1'b0;
@@ -84,7 +84,7 @@ always_ff @(posedge clk, negedge rst_n) begin
 		done <= 1'b0;
 end
 
-//// Implement slave select flop ////
+//// slave select flop ////
 always_ff @(posedge clk, negedge rst_n) begin
 	if(!rst_n)
 		SS_n <= 1'b1;

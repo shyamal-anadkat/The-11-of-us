@@ -44,16 +44,17 @@ module A2D_tb();
     for (i = 0; i <= 86; i=i+1) begin
       strt_cnv = 1'b1;
       chnnl = 3'd0;
-    // Wait for two 16 bit transactions
-    repeat(32)@(posedge SCLK);
-    @(posedge cnv_cmplt);
-
-    if (res != (12'hC00 - 12'h010*i)) begin
-      $display("TEST FAILED: res should be Oh%h and is 0h%h", (12'hC00 - 12'h010*i), res);
-      $stop();
+      // Wait for two 16 bit transactions and for the conversion to finish
+      repeat(32)@(posedge SCLK);
+      @(posedge cnv_cmplt);
+      // res should decrease by 0x010 each iteration
+      if (res != (12'hC00 - 12'h010*i)) begin
+        $display("TEST FAILED: res should be Oh%h and is 0h%h", (12'hC00 - 12'h010*i), res);
+        $stop();
+      end
     end
+    $display("TESTS PASSED");
+    $stop();
   end
-  $display("TESTS PASSED");
-  $stop();
-end
+
 endmodule
