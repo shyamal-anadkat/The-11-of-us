@@ -14,13 +14,6 @@ Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 
 Top level modules:
 	UART_rcv
 
-} {} {}} C:/Users/zosta/Desktop/The-11-of-us/HW5/CommTB.v {1 {vlog -work work -stats=none C:/Users/zosta/Desktop/The-11-of-us/HW5/CommTB.v
-Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
--- Compiling module CommTB
-
-Top level modules:
-	CommTB
-
 } {} {}} C:/Users/zosta/Desktop/The-11-of-us/HW5/A2D_intf.sv {1 {vlog -work work -sv -stats=none C:/Users/zosta/Desktop/The-11-of-us/HW5/A2D_intf.sv
 Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
 -- Compiling module A2D_intf
@@ -28,7 +21,14 @@ Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 
 Top level modules:
 	A2D_intf
 
-} {} {}} C:/Users/zosta/Desktop/The-11-of-us/HW5/cmd_cfg_tb.sv {1 {vlog -work work -sv -stats=none C:/Users/zosta/Desktop/The-11-of-us/HW5/cmd_cfg_tb.sv
+} {} {}} C:/Users/zosta/Desktop/The-11-of-us/HW5/CommTB.v {1 {vlog -work work -stats=none C:/Users/zosta/Desktop/The-11-of-us/HW5/CommTB.v
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module CommTB
+
+Top level modules:
+	CommTB
+
+} {} {}} C:/Users/zosta/Desktop/The-11-of-us/HW5/cmd_cfg_tb.sv {1 {vlog -work work -sv -stats=none {C:\Users\zosta\Desktop\The-11-of-us\HW5\cmd_cfg_tb.sv}
 Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
 -- Compiling module cmd_cfg_tb
 
@@ -70,19 +70,19 @@ Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 
 Top level modules:
 	A2D_tb
 
-} {} {}} C:/Users/zosta/Desktop/The-11-of-us/HW5/UART_tx.v {1 {vlog -work work -stats=none C:/Users/zosta/Desktop/The-11-of-us/HW5/UART_tx.v
-Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
--- Compiling module UART_tx
-
-Top level modules:
-	UART_tx
-
 } {} {}} C:/Users/zosta/Desktop/The-11-of-us/HW5/UART_wrapper.sv {1 {vlog -work work -sv -stats=none C:/Users/zosta/Desktop/The-11-of-us/HW5/UART_wrapper.sv
 Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
 -- Compiling module UART_wrapper
 
 Top level modules:
 	UART_wrapper
+
+} {} {}} C:/Users/zosta/Desktop/The-11-of-us/HW5/UART_tx.v {1 {vlog -work work -stats=none C:/Users/zosta/Desktop/The-11-of-us/HW5/UART_tx.v
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module UART_tx
+
+Top level modules:
+	UART_tx
 
 } {} {}} C:/Users/zosta/Desktop/The-11-of-us/HW5/ADC128S.sv {1 {vlog -work work -sv -stats=none C:/Users/zosta/Desktop/The-11-of-us/HW5/ADC128S.sv
 Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
