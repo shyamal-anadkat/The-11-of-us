@@ -25,12 +25,9 @@ input cal_done, cnv_cmplt, cmd_rdy, clk, rst_n;
 /// timer width parameter (will be changed to 26 for real quad) ///
 parameter TIMER_WIDTH = 26;
 
-
-///////////////////////////////////////////////
-// Internal wires/regs declared next //////////
-///////////////////////////////////////////////
-
-
+//////////////////////////////////////////////
+//          Command Opcodes                 //
+//////////////////////////////////////////////
 localparam REQ_BATT = 8'h01;
 localparam SET_PTCH = 8'h02;
 localparam SET_ROLL = 8'h03;
@@ -40,6 +37,10 @@ localparam CALIBRATE = 8'h06;
 localparam EMER_LAND = 8'h07;
 localparam MTRS_OFF = 8'h08;
 
+
+///////////////////////////////////////////////
+// Internal wires/regs declared next //////////
+///////////////////////////////////////////////
 logic [TIMER_WIDTH-1:0] mtr_ramp_tmr;
 logic clr_tmr;
 logic wrt_ptch, wrt_roll, wrt_yaw, wrt_thrst, emer_land;
@@ -140,6 +141,7 @@ state <= next;
     		if (cmd_rdy) begin
     			case (cmd)
     				REQ_BATT: begin
+                        // begin conversion then go to SET_BATT to wait for completion
     					strt_cnv = 1'b1;
     					next = SET_BATT;
     				end
@@ -183,10 +185,11 @@ state <= next;
     			endcase
     		end
     		else
-    		next = IDLE;
+    			next = IDLE;
     	end
     	
-    	SET_BATT: begin 
+    	SET_BATT: begin
+    		// wait for ADC response
     		if (cnv_cmplt) begin
     			resp = batt;
     			clr_cmd_rdy = 1'b1;
@@ -194,9 +197,10 @@ state <= next;
     			next = IDLE;
     		end
     		else
-    		next = SET_BATT;
+    			next = SET_BATT;
     	end
     	
+        // state to send positive acknowledgement
     	POS_ACK: begin
     		resp = 8'hA5;
     		clr_cmd_rdy = 1'b1;
@@ -207,14 +211,16 @@ state <= next;
     	WAIT: begin
     		clr_tmr = 1'b0;
     		en_mtrs = 1'b1;
+            // Wait for timer to be saturated, then assert strt_cal for one cycle
     		if (&mtr_ramp_tmr) begin
     			next = CALIBRATE_QUAD;
-			strt_cal = 1'b1;
+    			strt_cal = 1'b1;
     		end else
     			next = WAIT;
     	end
     	
     	CALIBRATE_QUAD: begin
+    		// keep intertial_cal asserted until we leave this state
     		inertial_cal = 1'b1;
     		if (cal_done)
     			next = POS_ACK;

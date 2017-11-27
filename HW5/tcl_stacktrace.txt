@@ -70,3 +70,52 @@ Trace back: can't read "tmp_array(Default)": no such element in array
     (command bound to event)
   <2:C:/Modeltech_pe_edu_10.4a/win32pe_edu/tk8.5/bgerror.tcl:92: ::tkerror {can't set "CurrentColConfigName": can't read "tmp_array(Default)": no such element in array}
   <1:eval:1: ::tk::dialog::error::bgerror {can't set "CurrentColConfigName": can't read "tmp_array(Default)": no such element in array}
+Tue Nov 21 01:22:09 CST 2017
+Trace back: can't read "tmp_array(Default)": no such element in array
+    while executing
+"foreach column_label $tmp_array($CurrentColConfigName) {
+		if { [column exists $column_label] } {
+			continue
+		}
+		column add $column_label
+	}"
+    (object "::.main_pane.project.interior.cs.body.project" method "::vsimwidgets::Hierarchy::updateColumnVisibility" body line 13)
+    invoked from within
+"updateColumnVisibility"
+    (object "::.main_pane.project.interior.cs.body.project" method "::vsimwidgets::Hierarchy::ApplyCurrentColumnConfiguration" body line 10)
+    invoked from within
+"ApplyCurrentColumnConfiguration $CurrentColConfigName"
+    (object "::.main_pane.project.interior.cs.body.project" method "::vsimwidgets::Hierarchy::UpdateCurrentColumnConfiguration" body line 7)
+    invoked from within
+"::.main_pane.project.interior.cs.body.project UpdateCurrentColumnConfiguration CurrentColConfigName {} w"
+    (in namespace inscope "::vsimwidgets::Hierarchy" script line 1)
+    invoked from within
+"namespace inscope ::vsimwidgets::Hierarchy {::.main_pane.project.interior.cs.body.project UpdateCurrentColumnConfiguration} CurrentColConfigName {} w"
+    (write trace on "CurrentColConfigName")
+    invoked from within
+"set CurrentColConfigName $current_config"
+    (object "::.main_pane.project.interior.cs.body.project" method "::vsimwidgets::Hierarchy::LoadColumnData" body line 35)
+    invoked from within
+"LoadColumnData"
+    (object "::.main_pane.project.interior.cs.body.project" method "::vsimwidgets::Hierarchy::_MapEvent" body line 3)
+    invoked from within
+"::.main_pane.project.interior.cs.body.project _MapEvent"
+    (in namespace inscope "::vsimwidgets::Hierarchy" script line 1)
+    invoked from within
+"namespace inscope ::vsimwidgets::Hierarchy {::.main_pane.project.interior.cs.body.project _MapEvent}"
+    (command bound to event)
+  <2:C:/Modeltech_pe_edu_10.4a/win32pe_edu/tk8.5/bgerror.tcl:92: ::tkerror {can't set "CurrentColConfigName": can't read "tmp_array(Default)": no such element in array}
+  <1:eval:1: ::tk::dialog::error::bgerror {can't set "CurrentColConfigName": can't read "tmp_array(Default)": no such element in array}
+Tue Nov 21 19:11:11 CST 2017
+Trace back: can't read "Project(EchoCompileOutput)": no such element in array
+    while executing
+"lappend ProjectWriteArgs	$Project(EchoCompileOutput)"
+    (procedure "Project::saveProjectSpecificSettings" line 26)
+    invoked from within
+"Project::saveProjectSpecificSettings"
+    (procedure "quit" line 58)
+    invoked from within
+"quit"
+    (command for "WM_DELETE_WINDOW" window manager protocol)
+  <2:C:/Modeltech_pe_edu_10.4a/win32pe_edu/tk8.5/bgerror.tcl:92: ::tkerror {can't read "Project(EchoCompileOutput)": no such element in array}
+  <1:proc:137: ::tk::dialog::error::bgerror {can't read "Project(EchoCompileOutput)": no such element in array}
