@@ -178,7 +178,7 @@ always_ff @(posedge clk, negedge rst_n)
 always_comb begin
 	next = INIT1;
 	wrt = 1'b0;
-	cmd = RD_PTCH_L;
+	cmd = WR_EN_INT;
 	C_P_H = 1'b0;
 	C_P_L = 1'b0;
 	C_R_H = 1'b0;
