@@ -1,5 +1,5 @@
 module inert_intf_tb();
-reg clk, rst_n, motors_off, strt_cal, INT;
+reg clk, rst_n, motors_off, strt_cal;
 wire SS_n, SCLK, MISO, MOSI, vld, cal_done, INT, frnt, bck, lft, rght;
 wire [15:0] ptch, roll, yaw;
 reg [10:0] frnt_spd, bck_spd, lft_spd, rght_spd;
@@ -22,7 +22,7 @@ ESCs #(18) escs(.clk(clk),
 	.bck_spd(bck_spd), 
 	.lft_spd(lft_spd), 
 	.rght_spd(rght_spd), 
-	.motors_off(motos_off), 
+	.motors_off(motors_off), 
 	.frnt(frnt), 
 	.bck(bck), 
 	.lft(lft), 
@@ -63,13 +63,35 @@ always begin
 	strt_cal = 1;
 	@(posedge clk);
 	strt_cal = 0;
-	repeat(10)@(posedge clk);
+	if (intf.cmd != 16'h0D02) begin
+		$display("command is incorrect");
+		$stop();
+	end
+	@(negedge SS_n);
+	@(posedge clk);
+	if (intf.cmd != 16'h1062) begin
+		$display("command is incorrect");
+		$stop();
+	end
+	@(negedge SS_n);
+	@(posedge clk);
+	if (intf.cmd != 16'h1162) begin
+		$display("command is incorrect");
+		$stop();
+	end
+	@(negedge SS_n);
+	@(posedge clk);
+	if (intf.cmd != 16'h1460) begin
+		$display("command is incorrect");
+		$stop();
+	end
 	// test that motors are not being driven
 	motors_off = 1;
 	repeat(5)@(posedge clk);
 	motors_off = 0;
 	// test other things
 	repeat(32)@(posedge SCLK);
+	repeat(100)@(posedge SCLK);
 	$stop();
 end
 endmodule

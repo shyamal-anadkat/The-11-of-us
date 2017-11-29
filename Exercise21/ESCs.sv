@@ -9,7 +9,7 @@ localparam LFT_OFF = 10'h220;
 localparam RGHT_OFF = 10'h220;
 
 parameter WIDTH = 20;
-  wire [10:0] motors_off_ext = {11{motors_off}};
+wire [10:0] motors_off_ext = {11{motors_off}};
 wire [10:0] frnt_SPEED, bck_SPEED, lft_SPEED, rght_SPEED;
 wire [9:0] frnt_OFF, bck_OFF, lft_OFF, rght_OFF;
 
