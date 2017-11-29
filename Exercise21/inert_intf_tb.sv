@@ -1,5 +1,5 @@
 module inert_intf_tb();
-reg clk, rst_n, motors_off, strt_cal;
+reg clk, rst_n, motors_off, strt_cal, INT;
 wire SS_n, SCLK, MISO, MOSI, vld, cal_done, INT, frnt, bck, lft, rght;
 wire [15:0] ptch, roll, yaw;
 reg [10:0] frnt_spd, bck_spd, lft_spd, rght_spd;
@@ -35,6 +35,7 @@ inert_intf intf(.clk(clk),
 	.SCLK(SCLK), 
 	.MOSI(MOSI), 
 	.MISO(MISO), 
+	.INT(INT),
 	.vld(vld), 
 	.cal_done(cal_done), 
 	.ptch(ptch), 
