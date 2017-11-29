@@ -236,6 +236,7 @@ always_comb begin
 			if (INT_ff2) begin
 				next = READ_PTCH_L;
 				cmd = RD_PTCH_L;
+				wrt = 1'b1;
 			end
 			else
 				next = WAIT_FOR_INT;
@@ -246,6 +247,7 @@ always_comb begin
 				next = READ_PTCH_H;
 				C_P_L = 1'b1;
 				cmd = RD_PTCH_H;
+				wrt = 1'b1;
 			end
 			else begin
 				next = READ_PTCH_L;
@@ -258,6 +260,7 @@ always_comb begin
 				next = READ_ROLL_L;
 				C_P_H = 1'b1;
 				cmd = RD_ROLL_L;
+				wrt = 1'b1;
 			end
 			else begin
 				next = READ_PTCH_H;
@@ -270,6 +273,7 @@ always_comb begin
 				next = READ_ROLL_H;
 				C_R_L = 1'b1;
 				cmd = RD_ROLL_H;
+				wrt = 1'b1;
 			end
 			else begin
 				next = READ_ROLL_L;
@@ -282,6 +286,7 @@ always_comb begin
 				next = READ_YAW_L;
 				C_R_H = 1'b1;
 				cmd = RD_YAW_L;
+				wrt = 1'b1;
 			end
 			else begin
 				next = READ_ROLL_H;
@@ -294,6 +299,7 @@ always_comb begin
 				next = READ_YAW_H;
 				C_Y_L = 1'b1;
 				cmd = RD_YAW_H;
+				wrt = 1'b1;
 			end
 			else begin
 				next = READ_YAW_L;
@@ -306,6 +312,7 @@ always_comb begin
 				next = READ_AXL;
 				C_Y_H = 1'b1;
 				cmd = RD_AXL;
+				wrt = 1'b1;
 			end
 			else begin
 				next = READ_YAW_H;
@@ -318,6 +325,7 @@ always_comb begin
 				next = READ_AXH;
 				C_AX_L = 1'b1;
 				cmd = RD_AXH;
+				wrt = 1'b1;
 			end
 			else begin
 				next = READ_AXL;
@@ -330,6 +338,7 @@ always_comb begin
 				next = READ_AYL;
 				C_AX_H = 1'b1;
 				cmd = RD_AYL;
+				wrt = 1'b1;
 			end
 			else begin
 				next = READ_AXH;
@@ -342,6 +351,7 @@ always_comb begin
 				next = READ_AYH;
 				C_AY_L = 1'b1;
 				cmd = RD_AYH;
+				wrt = 1'b1;
 			end
 			else begin
 				next = READ_AYL;
@@ -354,6 +364,7 @@ always_comb begin
 				next = WAIT_FOR_INT;
 				C_AY_H = 1'b1;
 				vld = 1'b1;
+				wrt = 1'b1;
 			end
 			else begin
 				next = READ_AYH;

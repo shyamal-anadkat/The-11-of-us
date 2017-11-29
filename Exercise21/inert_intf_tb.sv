@@ -54,7 +54,7 @@ initial begin
 end
 
 always
-	#10 clk = ~clk;
+	#20 clk <= ~clk;
 
 always begin
 	repeat(2)@(posedge clk);
@@ -90,8 +90,15 @@ always begin
 	repeat(5)@(posedge clk);
 	motors_off = 0;
 	// test other things
-	repeat(32)@(posedge SCLK);
-	repeat(100)@(posedge SCLK);
+	repeat(50)@(posedge vld);
+	frnt_spd = 11'h16;
+	repeat(50)@(posedge vld);
+	bck_spd = 11'h56;
+	repeat(50)@(posedge vld);
+	lft_spd = 11'h06;
+	repeat(50)@(posedge vld);
+	rght_spd = 11'h76;
+	repeat(50)@(posedge vld);
 	$stop();
 end
 endmodule
