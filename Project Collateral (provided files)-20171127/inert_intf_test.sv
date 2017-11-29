@@ -4,22 +4,18 @@ module inert_intf_test (LED, SS_n, SCLK, MOSI, NEXT, RST_n, clk, INT, MISO);
 	output logic [7:0] LED;
 	input NEXT, INT, RST_n, clk, MISO;
 
-	logic vld, strt_cal;
+	logic vld, strt_cal, rst_n, next;
 	logic [15:0] ptch, roll, yaw;
 	logic [1:0] sel;
 
 	typedef enum logic [1:0] {CAL, PTCH, ROLL, YAW} state_t;
 	state_t state, nxt_state;
 
-	reg rst_n_sync, rst_n_1;
-
-	always_ff@(posedge clk) begin
-	  rst_n_1 <= RST_n;
-	  rst_n_sync <= rst_n_1;
-	end
+	rst_synch rstmod (.RST_n(RST_n), .clk(clk), .rst_n(rst_n));
+	PB_release pbmod(.PB(NEXT), .rst_n(rst_n), .clk(clk), .released(next));
 
 	inert_intf intf(.clk(clk), 
-		.rst_n(rst_n_sync), 
+		.rst_n(rst_n), 
 		.strt_cal(strt_cal), 
 		.SS_n(SS_n), 
 		.SCLK(SCLK), 
@@ -33,8 +29,8 @@ module inert_intf_test (LED, SS_n, SCLK, MOSI, NEXT, RST_n, clk, INT, MISO);
 		.yaw(yaw));
 
 //// SM implementation ////
-always_ff@(posedge clk or negedge rst_n_sync) begin
-  if (~rst_n_sync) begin
+always_ff@(posedge clk or negedge rst_n) begin
+  if (!rst_n) begin
     state <= CAL;
   end else begin
     state <= nxt_state;
@@ -64,7 +60,7 @@ always_comb begin
 		end
 
 		PTCH: begin
-			if(NEXT) begin
+			if(next) begin
 				nxt_state = ROLL;
 				sel = 2'b01;
 			end else begin
@@ -73,7 +69,7 @@ always_comb begin
 			end
 		end
 		ROLL: begin
-			if(NEXT) begin
+			if(next) begin
 				nxt_state = YAW;
 				sel = 2'b00;
 			end else begin
@@ -82,7 +78,7 @@ always_comb begin
 			end
 		end
 		YAW:begin 
-			if(NEXT) begin
+			if(next) begin
 				nxt_state = PTCH;
 			end else begin
 				nxt_state = YAW;
