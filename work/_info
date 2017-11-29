@@ -1,0 +1,256 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/Users/zosta/Desktop/The-11-of-us/HW5
+vADC128S
+Z0 DXx6 sv_std 3 std 0 22 WmjPaeP=7F5?QFXzJ>D[Q2
+Z1 !s110 1511974122
+!i10b 1
+!s100 0damBXUWz_8:HCk]^=0]c2
+IMT35QQGa>ld<B08<kN5OV0
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+!s105 ADC128S_sv_unit
+S1
+Z3 dC:/Users/zosta/Desktop/The-11-of-us
+Z4 w1511815644
+8C:/Users/zosta/Desktop/The-11-of-us/Exercise21/ADC128S.sv
+FC:/Users/zosta/Desktop/The-11-of-us/Exercise21/ADC128S.sv
+L0 1
+Z5 OP;L;10.4a;61
+r1
+!s85 0
+31
+Z6 !s108 1511974122.000000
+!s107 C:/Users/zosta/Desktop/The-11-of-us/Exercise21/ADC128S.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/zosta/Desktop/The-11-of-us/Exercise21/ADC128S.sv|
+!s101 -O0
+!i113 1
+Z7 o-work work -sv -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact -O0
+n@a@d@c128@s
+vCycloneIV
+R0
+Z8 !s110 1511974121
+!i10b 1
+!s100 5ZBL4X29l@^:IClV3OcGX0
+IRaPnBNMROZ]O]<eYXO2aI1
+R2
+!s105 CycloneIV_sv_unit
+S1
+R3
+R4
+8C:/Users/zosta/Desktop/The-11-of-us/Exercise21/CycloneIV.sv
+FC:/Users/zosta/Desktop/The-11-of-us/Exercise21/CycloneIV.sv
+L0 1
+R5
+r1
+!s85 0
+31
+Z9 !s108 1511974121.000000
+!s107 C:/Users/zosta/Desktop/The-11-of-us/Exercise21/CycloneIV.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/zosta/Desktop/The-11-of-us/Exercise21/CycloneIV.sv|
+!s101 -O0
+!i113 1
+R7
+n@cyclone@i@v
+vESC_interface
+R0
+R8
+!i10b 1
+!s100 aYfS]@D`mf7[MM?b6U[6H1
+IAdYA23AhH1X3a[454HT??2
+R2
+!s105 ESC_Interface_sv_unit
+S1
+R3
+R4
+8C:/Users/zosta/Desktop/The-11-of-us/Exercise21/ESC_Interface.sv
+FC:/Users/zosta/Desktop/The-11-of-us/Exercise21/ESC_Interface.sv
+L0 1
+R5
+r1
+!s85 0
+31
+R9
+!s107 C:/Users/zosta/Desktop/The-11-of-us/Exercise21/ESC_Interface.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/zosta/Desktop/The-11-of-us/Exercise21/ESC_Interface.sv|
+!s101 -O0
+!i113 1
+R7
+n@e@s@c_interface
+vESCs
+R0
+R1
+!i10b 1
+!s100 AEP;X2Hj>fSk_JE1HozMU0
+IgOl7<cEDa^5<Bc20c<2L<0
+R2
+!s105 ESCs_sv_unit
+S1
+R3
+w1511972844
+8C:/Users/zosta/Desktop/The-11-of-us/Exercise21/ESCs.sv
+FC:/Users/zosta/Desktop/The-11-of-us/Exercise21/ESCs.sv
+L0 1
+R5
+r1
+!s85 0
+31
+R6
+!s107 C:/Users/zosta/Desktop/The-11-of-us/Exercise21/ESCs.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/zosta/Desktop/The-11-of-us/Exercise21/ESCs.sv|
+!s101 -O0
+!i113 1
+R7
+n@e@s@cs
+vinert_intf
+R0
+R1
+!i10b 1
+!s100 :9P^kkY<m7j112_khUG`V1
+I237WZVVWWfae7BXC[W1ZB3
+R2
+!s105 inert_intf_sv_unit
+S1
+R3
+w1511909155
+8C:/Users/zosta/Desktop/The-11-of-us/Exercise21/inert_intf.sv
+FC:/Users/zosta/Desktop/The-11-of-us/Exercise21/inert_intf.sv
+L0 3
+R5
+r1
+!s85 0
+31
+R6
+!s107 C:/Users/zosta/Desktop/The-11-of-us/Exercise21/inert_intf.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/zosta/Desktop/The-11-of-us/Exercise21/inert_intf.sv|
+!s101 -O0
+!i113 1
+R7
+vinert_intf_tb
+R0
+R1
+!i10b 1
+!s100 Q9WoROIm[>Ek[mQi`D`4Y3
+ICWD3il9[n`95;<10OJ_QU3
+R2
+!s105 inert_intf_tb_sv_unit
+S1
+R3
+w1511972845
+8C:/Users/zosta/Desktop/The-11-of-us/Exercise21/inert_intf_tb.sv
+FC:/Users/zosta/Desktop/The-11-of-us/Exercise21/inert_intf_tb.sv
+L0 1
+R5
+r1
+!s85 0
+31
+R6
+!s107 C:/Users/zosta/Desktop/The-11-of-us/Exercise21/inert_intf_tb.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/zosta/Desktop/The-11-of-us/Exercise21/inert_intf_tb.sv|
+!s101 -O0
+!i113 1
+R7
+vinert_intf_test
+R0
+!s110 1511974123
+!i10b 1
+!s100 75Wg=cWN6CSC_Fi4Jh>dl3
+I]5C6:zh:LI^dl=b6K>i5z1
+R2
+!s105 inert_intf_test_sv_unit
+S1
+R3
+w1511974117
+8C:/Users/zosta/Desktop/The-11-of-us/Project Collateral (provided files)-20171127/inert_intf_test.sv
+FC:/Users/zosta/Desktop/The-11-of-us/Project Collateral (provided files)-20171127/inert_intf_test.sv
+L0 1
+R5
+r1
+!s85 0
+31
+R6
+!s107 C:/Users/zosta/Desktop/The-11-of-us/Project Collateral (provided files)-20171127/inert_intf_test.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/zosta/Desktop/The-11-of-us/Project Collateral (provided files)-20171127/inert_intf_test.sv|
+!s101 -O0
+!i113 1
+R7
+vinertial_integrator
+R0
+R1
+!i10b 1
+!s100 SDZFWkd237bLkOa3C395J0
+I:R>iaM[5`SkVjE5h9:2[z1
+R2
+!s105 inertial_integrator_sv_unit
+S1
+R3
+R4
+8C:/Users/zosta/Desktop/The-11-of-us/Exercise21/inertial_integrator.sv
+FC:/Users/zosta/Desktop/The-11-of-us/Exercise21/inertial_integrator.sv
+L0 1
+R5
+r1
+!s85 0
+31
+R6
+!s107 C:/Users/zosta/Desktop/The-11-of-us/Exercise21/inertial_integrator.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/zosta/Desktop/The-11-of-us/Exercise21/inertial_integrator.sv|
+!s101 -O0
+!i113 1
+R7
+vSPI_ADC128S
+R0
+R1
+!i10b 1
+!s100 ;E62=i88@ghW83DU@9;CK1
+I]Oz`FH3a29fM472LKIm?53
+R2
+!s105 SPI_ADC128S_sv_unit
+S1
+R3
+R4
+8C:/Users/zosta/Desktop/The-11-of-us/Exercise21/SPI_ADC128S.sv
+FC:/Users/zosta/Desktop/The-11-of-us/Exercise21/SPI_ADC128S.sv
+L0 1
+R5
+r1
+!s85 0
+31
+R6
+!s107 C:/Users/zosta/Desktop/The-11-of-us/Exercise21/SPI_ADC128S.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/zosta/Desktop/The-11-of-us/Exercise21/SPI_ADC128S.sv|
+!s101 -O0
+!i113 1
+R7
+n@s@p@i_@a@d@c128@s
+vSPI_mstr16
+R0
+R1
+!i10b 1
+!s100 bF>BgdPVE9HWfDRFC5AHM0
+I@nNGCcaUaKcgiXCmzE<^62
+R2
+!s105 SPI_mstr16_sv_unit
+S1
+R3
+R4
+8C:/Users/zosta/Desktop/The-11-of-us/Exercise21/SPI_mstr16.sv
+FC:/Users/zosta/Desktop/The-11-of-us/Exercise21/SPI_mstr16.sv
+L0 6
+R5
+r1
+!s85 0
+31
+R6
+!s107 C:/Users/zosta/Desktop/The-11-of-us/Exercise21/SPI_mstr16.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/zosta/Desktop/The-11-of-us/Exercise21/SPI_mstr16.sv|
+!s101 -O0
+!i113 1
+R7
+n@s@p@i_mstr16
