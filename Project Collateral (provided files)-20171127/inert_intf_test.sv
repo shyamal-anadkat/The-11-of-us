@@ -1,15 +1,18 @@
-module inert_intf_test (sel, stat, strt_cal, next, cal_done, clk, rst_n);
+module inert_intf_test (LED, SS_n, SCLK, MOSI, NEXT, RST_n, clk, INT, MISO);
 
-	output logic [1:0] sel;
-	output logic stat, strt_cal;
+	output logic SS_n, SCLK, MOSI;
+	output logic [7:0] LED;
+	input NEXT, INT, RST_n, clk, MISO;
 
-	input clk, rst_n, next, cal_done;
-
-	logic SS_n, SCLK, MISO, MOSI, vld, INT;
+	logic vld, strt_cal, rst_n, next;
 	logic [15:0] ptch, roll, yaw;
+	logic [1:0] sel;
 
 	typedef enum logic [1:0] {CAL, PTCH, ROLL, YAW} state_t;
 	state_t state, nxt_state;
+
+	rst_synch rstmod (.RST_n(RST_n), .clk(clk), .rst_n(rst_n));
+	PB_release pbmod(.PB(NEXT), .rst_n(rst_n), .clk(clk), .released(next));
 
 	inert_intf intf(.clk(clk), 
 		.rst_n(rst_n), 
@@ -26,28 +29,32 @@ module inert_intf_test (sel, stat, strt_cal, next, cal_done, clk, rst_n);
 		.yaw(yaw));
 
 //// SM implementation ////
-always_ff @(posedge clk, negedge rst_n) begin
-	if (!rst_n) begin
-		state <= CAL;
-	end else begin
-		state <= nxt_state;
-	end
+always_ff@(posedge clk or negedge rst_n) begin
+  if (!rst_n) begin
+    state <= CAL;
+  end else begin
+    state <= nxt_state;
+  end
 end
+
+
+assign LED = (sel == 2'b00) ? yaw[8:1] : 
+(sel == 2'b01) ? roll[8:1] : (sel == 2'b10) ? ptch[8:1] : 7'h00;
+
 
 always_comb begin
 	nxt_state = CAL;
-	stat = 1'b0;
 	strt_cal = 1'b0;
-	sel = 2'b00;
+	sel = 2'b11;
 
 	case (state)
 		CAL: begin 
 			if(cal_done) begin
 				nxt_state = PTCH;
-				sel = ptch;
+				sel = 2'b10;
 			end else begin 
 				nxt_state = CAL;
-				stat = 1;
+				sel = 2'b11;
 				strt_cal = 1;
 			end
 		end
@@ -55,19 +62,19 @@ always_comb begin
 		PTCH: begin
 			if(next) begin
 				nxt_state = ROLL;
-				sel = roll;
+				sel = 2'b01;
 			end else begin
 				nxt_state = PTCH;
-				sel = ptch;
+				sel = 2'b10;
 			end
 		end
 		ROLL: begin
 			if(next) begin
 				nxt_state = YAW;
-				sel = yaw;
+				sel = 2'b00;
 			end else begin
 				nxt_state = ROLL;
-				sel = roll;
+				sel = 2'b00;
 			end
 		end
 		YAW:begin 
@@ -75,7 +82,7 @@ always_comb begin
 				nxt_state = PTCH;
 			end else begin
 				nxt_state = YAW;
-				sel = yaw;
+				sel = 2'b00;
 			end
 		end
 		default: begin
