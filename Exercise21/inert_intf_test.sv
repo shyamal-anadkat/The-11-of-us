@@ -39,7 +39,9 @@ end
 
 
 assign LED = (sel == 2'b00) ? yaw[8:1] : 
-(sel == 2'b01) ? roll[8:1] : (sel == 2'b10) ? ptch[8:1] : 7'h00;
+		(sel == 2'b01) ? roll[8:1] : 
+		(sel == 2'b10) ? ptch[8:1] : 
+		7'h00;
 
 
 always_comb begin
@@ -74,12 +76,13 @@ always_comb begin
 				sel = 2'b00;
 			end else begin
 				nxt_state = ROLL;
-				sel = 2'b00;
+				sel = 2'b01;
 			end
 		end
 		YAW:begin 
 			if(next) begin
 				nxt_state = PTCH;
+				sel = 2'b10;
 			end else begin
 				nxt_state = YAW;
 				sel = 2'b00;

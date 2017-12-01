@@ -364,7 +364,6 @@ always_comb begin
 				next = WAIT_FOR_INT;
 				C_AY_H = 1'b1;
 				vld = 1'b1;
-				wrt = 1'b1;
 			end
 			else begin
 				next = READ_AYH;
