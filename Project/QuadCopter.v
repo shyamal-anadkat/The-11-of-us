@@ -115,6 +115,6 @@ module QuadCopter(clk,RST_n,SS_n,SCLK,MOSI,MISO,INT,RX,TX,LED,FRNT,BCK,LFT,RGHT,
   /////////////////////////////////////
   // Instantiate reset synchronizer //
   ///////////////////////////////////  
-  reset_synch iRST(.clk(clk),.RST_n(RST_n),.rst_n(rst_n));
+  rst_synch iRST(.clk(clk),.RST_n(RST_n),.rst_n(rst_n));
   
 endmodule
