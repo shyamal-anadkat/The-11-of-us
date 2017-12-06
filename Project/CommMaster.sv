@@ -1,5 +1,5 @@
 module CommMaster 
-	(resp, resp_rdy, frm_snt, TX, RX, cmd, snd_cmd, data, clk, rst_n);
+	(resp, resp_rdy, frm_snt, TX, RX, cmd, snd_cmd, data, clr_resp_rdy, clk, rst_n);
 
 ///////////////////////////////////////////////
 // Module Interface Input and Outputs /////////
@@ -19,7 +19,7 @@ input RX;
 input [7:0] cmd;
 input snd_cmd;
 input [15:0] data;
-
+input clr_resp_rdy;
 
 ///////////////////////////////////////////////
 /// internal signals                        ///
@@ -29,6 +29,7 @@ logic [1:0] sel;
 logic trmt;
 logic tx_done;
 logic set_cmplt, clr_cmplt;
+logic rx_rdy;
 
 logic [7:0] tx_data; //input to UART
 logic [7:0] low_bits, mid_bits;
@@ -44,12 +45,23 @@ UART uartmod
 (.clk(clk),
 	.rst_n(rst_n),
 	.RX(RX),.TX(TX),
-	.rx_rdy(resp_rdy),
+	.rx_rdy(rx_rdy),
 	.clr_rx_rdy(clr_cmplt),
 	.rx_data(resp),
 	.trmt(trmt),
 	.tx_data(tx_data),
 	.tx_done(tx_done));
+
+/// to knock resp_rdy down ///
+always_ff @(posedge clk or negedge rst_n) begin
+	if(!rst_n) begin
+		resp_rdy <= 1'b0;
+	end else if (clr_resp_rdy) begin
+		resp_rdy <= 1'b0; ;
+	end else begin
+		resp_rdy <= rx_rdy;
+	end
+end
 
 
 //// flops for high and mid bits ////

@@ -23,7 +23,7 @@ input cal_done, cnv_cmplt, cmd_rdy, clk, rst_n;
 
 
 /// timer width parameter (will be changed to 26 for real quad) ///
-parameter TIMER_WIDTH = 26;
+parameter TIMER_WIDTH = 9;
 
 //////////////////////////////////////////////
 //          Command Opcodes                 //
@@ -57,9 +57,9 @@ always_ff @(posedge clk, negedge rst_n)
 if (!rst_n)
 	motors_off <= 1'b1;
 else if (mtrs_off)
-	motors_off <= 1'b0;
-else if (en_mtrs)
 	motors_off <= 1'b1;
+else if (en_mtrs)
+	motors_off <= 1'b0;
 
 //// wait timer flop ////
 always_ff @(posedge clk, negedge rst_n)

@@ -9,6 +9,7 @@ module CommTB ();
 reg[15:0] data_in;
 reg [7:0] cmd_in;
 reg snd_cmd, clk, rst_n;
+reg clr_resp_rdy;
 
 wire [15:0] data_out;
 wire [7:0] resp, cmd_out;
@@ -20,7 +21,7 @@ integer i;
 //// CommMaster DUT ////
 CommMaster iComm(.resp(resp), .resp_rdy(resp_rdy), .frm_snt(frm_snt), .TX(TX_RX),
 	.data(data_in), .cmd(cmd_in), .clk(clk), .rst_n(rst_n), .snd_cmd(snd_cmd),
-	.RX(RX_TX));
+	.RX(RX_TX), .clr_resp_rdy(clr_resp_rdy));
 
 //// Wrapper DUT. Not sure if we need snd_resp ////
 UART_wrapper iwrapper(.clk(clk), .rst_n(rst_n), .RX(TX_RX), .TX(RX_TX), .cmd(cmd_out),
@@ -32,6 +33,7 @@ initial begin
 	clk = 0;
 	rst_n = 0;
 	snd_cmd = 0;
+	clr_resp_rdy = 0;
 	tst_data[0] = 16'h0060;
 	tst_data[1] = 16'h0076;
 	tst_data[2] = 16'hffff;
