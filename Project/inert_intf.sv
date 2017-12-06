@@ -153,7 +153,7 @@ SPI_mstr16 spi (.SS_n(SS_n),
 				.rst_n(rst_n));
 
 // Inertial integrator instance
-inertial_integrator integrator (.clk(clk),
+inertial_integrator #(3) integrator (.clk(clk),
 								.rst_n(rst_n),
 								.strt_cal(strt_cal),
 								.cal_done(cal_done),

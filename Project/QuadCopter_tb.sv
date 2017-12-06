@@ -45,13 +45,13 @@ CommMaster iMSTR(.clk(clk), .rst_n(RST_n), .RX(TX), .TX(RX),
 				 .resp(resp), .clr_resp_rdy(clr_resp_rdy));
 
 initial begin
-
+/*
   This is where you do the real work.
   This section could be done as a bunch of calls to testing sub tasks contained in a separate file.
   
   You might want to consider having several versions of this file that test several different
   smaller things instead of having one huge test that runs forever.
- 
+*/ 
 end
 
 always

@@ -64,9 +64,9 @@ else if (en_mtrs)
 //// wait timer flop ////
 always_ff @(posedge clk, negedge rst_n)
 if (!rst_n)
-	mtr_ramp_tmr <= 9'h000;
+	mtr_ramp_tmr <= 0;
 else if (clr_tmr)
-	mtr_ramp_tmr <= 9'h000;
+	mtr_ramp_tmr <= 0;
 else
 mtr_ramp_tmr <= mtr_ramp_tmr + 1;
 
