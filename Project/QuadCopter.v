@@ -58,8 +58,14 @@ module QuadCopter(clk,RST_n,SS_n,SCLK,MOSI,MISO,INT,RX,TX,LED,FRNT,BCK,LFT,RGHT,
   /////////////////////////////////////////////////////////////////////////
   // Instantiate UART_wrapper that receives commands from wireless link //
   /////////////////////////////////////////////////////////////////////// 
-  Signal interface to UART_wrapper was not rigidly specified, so you instantiate
-  your UART_wrapper here.
+  //Signal interface to UART_wrapper was not rigidly specified, so you instantiate
+  //your UART_wrapper here.
+   UART_wrapper(.clk(clk), .rst_n(rst_n), 
+    .RX(RX), .TX(TX), .cmd(cmd), .data(data), 
+    .cmd_rdy(cmd_rdy), .snd_resp(send_resp), 
+    .resp_sent(resp_sent), 
+    .resp(resp), 
+    .clr_cmd_rdy(clr_cmd_rdy));
 						
   ///////////////////////////////////////////////////////////////////////
   // Instantiate command config unit (interprets & executes commands) //
@@ -93,9 +99,9 @@ module QuadCopter(clk,RST_n,SS_n,SCLK,MOSI,MISO,INT,RX,TX,LED,FRNT,BCK,LFT,RGHT,
   ESCs iESC (.clk(clk),.rst_n(rst_n),.frnt_spd(frnt_spd),.bck_spd(bck_spd),.lft_spd(lft_spd),
              .rght_spd(rght_spd),.motors_off(motors_off),.frnt(FRNT),.bck(BCK),.lft(LFT),.rght(RGHT));
 			 
-  Hey...what is this unit?  Remember back in Exercise08 and Exercise09 you created a ESC_interface,
-  and we tested it.  This block is fairly simple and instantiates 4 copies of ESC_interface along with some
-  other logic.  Look at the project spec for more details.
+  //Hey...what is this unit?  Remember back in Exercise08 and Exercise09 you created a ESC_interface,
+  //and we tested it.  This block is fairly simple and instantiates 4 copies of ESC_interface along with some
+  //other logic.  Look at the project spec for more details.
 			 
   ////////////////////////////////////////////////////////////
   // Instantiate A2D Interface for reading battery voltage //
