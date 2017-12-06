@@ -291,7 +291,7 @@ always begin
 	@(posedge cmd_rdy);
 	repeat(2)@(posedge clk);
     // motors_off should be asserted
-	if (!motors_off) begin
+	if (motors_off) begin
 		$display("Motors should be off");
 		$stop();
 	end
