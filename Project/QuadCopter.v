@@ -60,9 +60,11 @@ module QuadCopter(clk,RST_n,SS_n,SCLK,MOSI,MISO,INT,RX,TX,LED,FRNT,BCK,LFT,RGHT,
   /////////////////////////////////////////////////////////////////////// 
   //Signal interface to UART_wrapper was not rigidly specified, so you instantiate
   //your UART_wrapper here.
-   UART_wrapper(.clk(clk), .rst_n(rst_n), 
-    .RX(RX), .TX(TX), .cmd(cmd), .data(data), 
-    .cmd_rdy(cmd_rdy), .snd_resp(send_resp), 
+   UART_wrapper iWRAPPER(.clk(clk), .rst_n(rst_n), 
+    .RX(RX), .TX(TX), 
+    .cmd(cmd), .data(data), 
+    .cmd_rdy(cmd_rdy), 
+    .snd_resp(send_resp), 
     .resp_sent(resp_sent), 
     .resp(resp), 
     .clr_cmd_rdy(clr_cmd_rdy));
