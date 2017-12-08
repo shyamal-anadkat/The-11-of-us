@@ -195,42 +195,42 @@ always_comb begin
 	case (state)
 		INIT1: begin
 			if (&timer) begin
+			    cmd = WR_EN_INT;
 				wrt = 1'b1;
 				next = INIT2;
 			end
 			else
 				next = INIT1;
-			cmd = WR_EN_INT;
 		end
 		
 		INIT2: begin
 			if (&timer) begin
+			    cmd = WR_SETUP_ACCL;
 				wrt = 1'b1;
 				next = INIT3;
 			end
 			else
 				next = INIT2;
-			cmd = WR_SETUP_ACCL;
 		end
 		
 		INIT3: begin
 			if (&timer) begin
+				cmd = WR_SETUP_GYRO;
 				wrt = 1'b1;
 				next = INIT4;
 			end
 			else
 				next = INIT3;
-			cmd = WR_SETUP_GYRO;
 		end
 		
 		INIT4: begin
 			if (&timer) begin
+				cmd = WR_ROUNDING_ON;
 				wrt = 1'b1;
 				next = WAIT_FOR_INT;
 			end
 			else
 				next = INIT4;
-			cmd = WR_ROUNDING_ON;
 		end
 		
 		WAIT_FOR_INT: begin
@@ -250,10 +250,8 @@ always_comb begin
 				cmd = RD_PTCH_H;
 				wrt = 1'b1;
 			end
-			else begin
+			else
 				next = READ_PTCH_L;
-				cmd = RD_PTCH_L;
-			end
 		end
 		
 		READ_PTCH_H: begin
@@ -263,10 +261,8 @@ always_comb begin
 				cmd = RD_ROLL_L;
 				wrt = 1'b1;
 			end
-			else begin
+			else
 				next = READ_PTCH_H;
-				cmd = RD_PTCH_H;
-			end
 		end
 		
 		READ_ROLL_L: begin
@@ -276,10 +272,8 @@ always_comb begin
 				cmd = RD_ROLL_H;
 				wrt = 1'b1;
 			end
-			else begin
+			else
 				next = READ_ROLL_L;
-				cmd = RD_ROLL_L;
-			end
 		end
 		
 		READ_ROLL_H: begin
@@ -289,10 +283,8 @@ always_comb begin
 				cmd = RD_YAW_L;
 				wrt = 1'b1;
 			end
-			else begin
+			else
 				next = READ_ROLL_H;
-				cmd = RD_ROLL_H;
-			end
 		end
 		
 		READ_YAW_L: begin
@@ -302,10 +294,8 @@ always_comb begin
 				cmd = RD_YAW_H;
 				wrt = 1'b1;
 			end
-			else begin
+			else
 				next = READ_YAW_L;
-				cmd = RD_YAW_L;
-			end
 		end
 		
 		READ_YAW_H: begin
@@ -315,10 +305,8 @@ always_comb begin
 				cmd = RD_AXL;
 				wrt = 1'b1;
 			end
-			else begin
+			else
 				next = READ_YAW_H;
-				cmd = RD_YAW_H;
-			end
 		end
 		
 		READ_AXL: begin
@@ -328,10 +316,8 @@ always_comb begin
 				cmd = RD_AXH;
 				wrt = 1'b1;
 			end
-			else begin
+			else
 				next = READ_AXL;
-				cmd = RD_AXL;
-			end
 		end
 		
 		READ_AXH: begin
@@ -341,10 +327,8 @@ always_comb begin
 				cmd = RD_AYL;
 				wrt = 1'b1;
 			end
-			else begin
+			else
 				next = READ_AXH;
-				cmd = RD_AXH;
-			end
 		end
 		
 		READ_AYL: begin
@@ -354,10 +338,8 @@ always_comb begin
 				cmd = RD_AYH;
 				wrt = 1'b1;
 			end
-			else begin
+			else
 				next = READ_AYL;
-				cmd = RD_AYL;
-			end
 		end
 		
 		READ_AYH: begin
@@ -366,10 +348,8 @@ always_comb begin
 				C_AY_H = 1'b1;
 				vld = 1'b1;
 			end
-			else begin
+			else
 				next = READ_AYH;
-				cmd = RD_AYH;
-			end
 		end
 		
 		default: begin

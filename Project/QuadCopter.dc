@@ -11,7 +11,7 @@
 ##########################
 read_file -format sverilog {./QuadCopter.v ./UART_tx.v ./UART_rcv.sv ./UART.v \
 ./cmd_cfg.sv ./ESC_Interface.sv ./ESCs.sv ./flght_cntrl.sv ./inert_intf.sv \
-./inertial_integrator.sv ./PB_release.sv ./rst_synch.sv ./UART_wrapper.sv \
+./inertial_integrator.sv ./rst_synch.sv ./UART_wrapper.sv \
 ./SPI_mstr16.sv ./A2D_intf.sv } 
 
 ##########################
@@ -65,14 +65,14 @@ set current_design QuadCopter
 #########################
 ## smash the hierarchy (design ware component)
 #########################
-compile -map_effort low
+compile -map_effort medium
 check_design
 
 set_clock_uncertainty 0.15 clk
-set_fix_hold clk
 
 ungroup -all -flatten
-compile_ultra
+set_fix_hold clk
+compile -map_effort high
 check_design
 
 #########################
