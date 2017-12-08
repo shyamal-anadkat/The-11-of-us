@@ -71,28 +71,54 @@ initial begin
 
   Initialize();
 
+  ///////////////////////////////////////////////////////
+  // Test basic commands and responses                 //
+  ///////////////////////////////////////////////////////
   SendCmd(.comd(REQ_BATT), .dat(NO_DATA));
   ChkResp(8'hC0); // fill in with what battery should be
 
   SendCmd(.comd(SET_PTCH), .dat(16'hfa));
+  ChkVal16(.act(iDUT.ifly.d_ptch), .exp(16'hfa), .name("DPtch"));
   ChkPosAck;
 
-  SendCmd(.comd(SET_ROLL), .dat(16'hfa));
+  SendCmd(.comd(SET_ROLL), .dat(16'hfb));
+  ChkVal16(.act(iDUT.ifly.d_roll), .exp(16'hfb), .name("DRoll"));
   ChkPosAck;
 
-  SendCmd(.comd(SET_YAW), .dat(16'hfa));
+  SendCmd(.comd(SET_YAW), .dat(16'hfc));
+  ChkVal16(.act(iDUT.ifly.d_yaw), .exp(16'hfc), .name("DYaw"));
   ChkPosAck;
 
-  SendCmd(.comd(SET_THRST), .dat(16'hfa));
+  SendCmd(.comd(SET_THRST), .dat(16'hfd));
+  ChkVal16(.act(iDUT.ifly.thrst), .exp(16'hfd), .name("Thrst"));
   ChkPosAck;
 
   SendCmd(.comd(CALIBRATE), .dat(NO_DATA));
-  ChkPosAck;
+  #10000
+  // ptch roll and yaw should converge to the values we want
+  ChkVal16(.act(iDUT.ifly.ptch), .exp(iDUT.ifly.d_ptch), .name("Ptch"));
+  ChkVal16(.act(iDUT.ifly.roll), .exp(iDUT.ifly.d_roll), .name("Roll"));
+  ChkVal16(.act(iDUT.ifly.yaw), .exp(iDUT.ifly.d_yaw), .name("Yaw"));
 
   SendCmd(.comd(EMER_LAND), .dat(NO_DATA));
+  ChkVal16(.act(iDUT.ifly.ptch), .exp(16'd0), .name("Ptch"));
+  ChkVal16(.act(iDUT.ifly.yaw), .exp(16'd0), .name("Yaw"));
+  ChkVal16(.act(iDUT.ifly.roll), .exp(16'd0), .name("Roll"));
+  ChkVal16(.act(iDUT.ifly.thrst), .exp(16'd0), .name("Thrst"));
   ChkPosAck;
 
   SendCmd(.comd(MTRS_OFF), .dat(NO_DATA));
+  ChkVal(.act(iDUT.motors_off), .exp(1'b1), .name("Motors"));
+  ChkPosAck;
+  ChkVal(.act(iDUT.motors_off), .exp(1'b1), .name("Motors")); // should stay high until calibrate
+
+  SendCmd(.comd(CALIBRATE), .dat(NO_DATA));
+  ChkVal(.act(iDUT.motors_off), .exp(1'b0), .name("Motors"));
+  ChkVal16(.act(iDUT.ifly.ptch), .exp(16'd0), .name("Ptch"));
+  ChkVal16(.act(iDUT.ifly.yaw), .exp(16'd0), .name("Yaw"));
+  ChkVal16(.act(iDUT.ifly.roll), .exp(16'd0), .name("Roll"));
+  ChkVal16(.act(iDUT.ifly.thrst), .exp(16'd0), .name("Thrst"));
+  ChkVal(.act(iDUT.motors_off), .exp(1'b0), .name("Motors")); // should no longer be high
   ChkPosAck;
 
   $display("Success!");
