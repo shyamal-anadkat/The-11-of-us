@@ -77,6 +77,9 @@ initial begin
   SendCmd(.comd(REQ_BATT), .dat(NO_DATA));
   ChkResp(8'hC0); // fill in with what battery should be
 
+  SendCmd(.comd(CALIBRATE), .dat(NO_DATA));
+  ChkPosAck;
+
   SendCmd(.comd(SET_PTCH), .dat(16'hfa));
   ChkVal16(.act(iDUT.ifly.d_ptch), .exp(16'hfa), .name("DPtch"));
   ChkPosAck;
@@ -93,8 +96,8 @@ initial begin
   ChkVal16(.act(iDUT.ifly.thrst), .exp(16'hfd), .name("Thrst"));
   ChkPosAck;
 
-  // SendCmd(.comd(CALIBRATE), .dat(NO_DATA));
-  #1000000000
+  repeat(90)@(posedge frnt_ESC);
+
   // ptch roll and yaw should converge to the values we want
   ChkVal16(.act(iDUT.ifly.ptch), .exp(iDUT.ifly.d_ptch), .name("Ptch"));
   ChkVal16(.act(iDUT.ifly.roll), .exp(iDUT.ifly.d_roll), .name("Roll"));

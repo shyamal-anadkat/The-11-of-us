@@ -2,6 +2,7 @@
 
 module inert_intf (ptch, roll, yaw, cal_done, vld, MOSI, SCLK, SS_n, clk, rst_n, MISO, INT, strt_cal);
 
+parameter inert_int = 11;
 input clk, rst_n, MISO, INT, strt_cal;
 
 output [15:0] ptch, roll, yaw;
@@ -153,7 +154,7 @@ SPI_mstr16 spi (.SS_n(SS_n),
 				.rst_n(rst_n));
 
 // Inertial integrator instance
-inertial_integrator #(3) integrator (.clk(clk),
+inertial_integrator #(inert_int) integrator (.clk(clk),
 								.rst_n(rst_n),
 								.strt_cal(strt_cal),
 								.cal_done(cal_done),
