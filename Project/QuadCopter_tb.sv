@@ -93,8 +93,8 @@ initial begin
   ChkVal16(.act(iDUT.ifly.thrst), .exp(16'hfd), .name("Thrst"));
   ChkPosAck;
 
-  SendCmd(.comd(CALIBRATE), .dat(NO_DATA));
-  #10000
+  // SendCmd(.comd(CALIBRATE), .dat(NO_DATA));
+  #1000000000
   // ptch roll and yaw should converge to the values we want
   ChkVal16(.act(iDUT.ifly.ptch), .exp(iDUT.ifly.d_ptch), .name("Ptch"));
   ChkVal16(.act(iDUT.ifly.roll), .exp(iDUT.ifly.d_roll), .name("Roll"));
