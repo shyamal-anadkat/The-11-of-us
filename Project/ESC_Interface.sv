@@ -40,7 +40,7 @@ always_ff@(posedge clk, negedge rst_n) begin
   if (~rst_n)
     counter <= 0;
   else
-    counter <= counter + 20'd1;
+    counter <= counter + 1'b1;
 end
 
 // Used to determine if we should reset PWM flop
