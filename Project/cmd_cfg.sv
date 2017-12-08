@@ -122,6 +122,7 @@ state <= next;
     // Default outputs //
     ////////////////////
     next = IDLE;
+	resp = 8'hA5;
     wrt_ptch = 1'b0;
     wrt_roll = 1'b0;
     wrt_yaw = 1'b0;
