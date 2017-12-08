@@ -69,70 +69,70 @@ always_ff @(posedge clk, negedge rst_n)
 	if (!rst_n)
 		ptch_l <= 8'h00;
 	else if (C_P_L)
-		ptch_l <= rd_data[15:8];
+		ptch_l <= rd_data[7:0];
 		
 // ptch_h holding register	
 always_ff @(posedge clk, negedge rst_n)
 	if (!rst_n)
 		ptch_h <= 8'h00;
 	else if (C_P_H)
-		ptch_h <= rd_data[15:8];
+		ptch_h <= rd_data[7:0];
 		
 // roll_l holding register
 always_ff @(posedge clk, negedge rst_n)
 	if (!rst_n)
 		roll_l <= 8'h00;
 	else if (C_R_L)
-		roll_l <= rd_data[15:8];
+		roll_l <= rd_data[7:0];
 		
 // roll_h holding register
 always_ff @(posedge clk, negedge rst_n)
 	if (!rst_n)
 		roll_h <= 8'h00;
 	else if (C_R_H)
-		roll_h <= rd_data[15:8];
+		roll_h <= rd_data[7:0];
 		
 // yaw_l holding register
 always_ff @(posedge clk, negedge rst_n)
 	if (!rst_n)
 		yaw_l <= 8'h00;
 	else if (C_Y_L)
-		yaw_l <= rd_data[15:8];
+		yaw_l <= rd_data[7:0];
 		
 // yaw_h holding register
 always_ff @(posedge clk, negedge rst_n)
 	if (!rst_n)
 		yaw_h <= 8'h00;
 	else if (C_Y_H)
-		yaw_h <= rd_data[15:8];
+		yaw_h <= rd_data[7:0];
 		
 // ax_l holding register
 always_ff @(posedge clk, negedge rst_n)
 	if (!rst_n)
 		ax_l <= 8'h00;
 	else if (C_AX_L)
-		ax_l <= rd_data[15:8];
+		ax_l <= rd_data[7:0];
 		
 // ax_h holding register
 always_ff @(posedge clk, negedge rst_n)
 	if (!rst_n)
 		ax_h <= 8'h00;
 	else if (C_AX_H)
-		ax_h <= rd_data[15:8];
+		ax_h <= rd_data[7:0];
 		
 // ay_l holding register
 always_ff @(posedge clk, negedge rst_n)
 	if (!rst_n)
 		ay_l <= 8'h00;
 	else if (C_AY_L)
-		ay_l <= rd_data[15:8];
+		ay_l <= rd_data[7:0];
 		
 // ay_h holding register
 always_ff @(posedge clk, negedge rst_n)
 	if (!rst_n)
 		ay_h <= 8'h00;
 	else if (C_AY_H)
-		ay_h <= rd_data[15:8];
+		ay_h <= rd_data[7:0];
 		
 // Combine high and low bytes
 assign ptch_rt = {ptch_h, ptch_l};

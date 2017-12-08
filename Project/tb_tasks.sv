@@ -70,3 +70,17 @@ task ChkVal(input [15:0] act, input [15:0] exp, input [6*8:0] name);
     $stop();
   end
 endtask
+
+task ChkPerc(input [15:0] act, input [15:0] exp, input [6*8:0] name);
+  if (100*act/exp < 75) begin
+    $display("%s not converging. Was 0x%x, should be close to 0x%x", name, act, exp);
+    $stop();
+  end
+endtask
+
+task ChkGtr(input [10:0] act, input [10:0] exp, input [10*8:0] name);
+  if (act <= exp) begin
+    $display("%s was not greater than expected value. Was 0x%x should be greater than 0x%x", name, act, exp);
+    $stop();
+  end
+endtask

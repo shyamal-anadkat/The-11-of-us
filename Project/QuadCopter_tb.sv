@@ -58,6 +58,8 @@ localparam MTRS_OFF = 8'h08;
 
 localparam NO_DATA = 16'd0;
 
+reg [10:0] prev_frnt_spd, prev_bck_spd, prev_rgt_spd, prev_lft_spd;
+
 initial begin
 
   ///This is where you do the real work.
@@ -75,33 +77,7 @@ initial begin
   // Test basic commands and responses                 //
   ///////////////////////////////////////////////////////
   SendCmd(.comd(REQ_BATT), .dat(NO_DATA));
-  ChkResp(8'hC0); // fill in with what battery should be
-
-  SendCmd(.comd(CALIBRATE), .dat(NO_DATA));
-  ChkPosAck;
-
-  SendCmd(.comd(SET_PTCH), .dat(16'hfa));
-  ChkVal16(.act(iDUT.ifly.d_ptch), .exp(16'hfa), .name("DPtch"));
-  ChkPosAck;
-
-  SendCmd(.comd(SET_ROLL), .dat(16'hfb));
-  ChkVal16(.act(iDUT.ifly.d_roll), .exp(16'hfb), .name("DRoll"));
-  ChkPosAck;
-
-  SendCmd(.comd(SET_YAW), .dat(16'hfc));
-  ChkVal16(.act(iDUT.ifly.d_yaw), .exp(16'hfc), .name("DYaw"));
-  ChkPosAck;
-
-  SendCmd(.comd(SET_THRST), .dat(16'hfd));
-  ChkVal16(.act(iDUT.ifly.thrst), .exp(16'hfd), .name("Thrst"));
-  ChkPosAck;
-
-  repeat(90)@(posedge frnt_ESC);
-
-  // ptch roll and yaw should converge to the values we want
-  ChkVal16(.act(iDUT.ifly.ptch), .exp(iDUT.ifly.d_ptch), .name("Ptch"));
-  ChkVal16(.act(iDUT.ifly.roll), .exp(iDUT.ifly.d_roll), .name("Roll"));
-  ChkVal16(.act(iDUT.ifly.yaw), .exp(iDUT.ifly.d_yaw), .name("Yaw"));
+  ChkResp(8'hC0);
 
   SendCmd(.comd(EMER_LAND), .dat(NO_DATA));
   ChkVal16(.act(iDUT.ifly.ptch), .exp(16'd0), .name("Ptch"));
@@ -122,6 +98,54 @@ initial begin
   ChkVal16(.act(iDUT.ifly.roll), .exp(16'd0), .name("Roll"));
   ChkVal16(.act(iDUT.ifly.thrst), .exp(16'd0), .name("Thrst"));
   ChkVal(.act(iDUT.motors_off), .exp(1'b0), .name("Motors")); // should no longer be high
+  ChkPosAck;
+
+  SendCmd(.comd(SET_PTCH), .dat(16'h003a));
+  ChkVal16(.act(iDUT.ifly.d_ptch), .exp(16'h003a), .name("DPtch"));
+  ChkPosAck;
+
+  SendCmd(.comd(SET_ROLL), .dat(16'h003a));
+  ChkVal16(.act(iDUT.ifly.d_roll), .exp(16'h003a), .name("DRoll"));
+  ChkPosAck;
+
+  // make yaw negative
+  SendCmd(.comd(SET_YAW), .dat(16'h800a));
+  ChkVal16(.act(iDUT.ifly.d_yaw), .exp(16'h800a), .name("DYaw"));
+  ChkPosAck;
+
+  SendCmd(.comd(SET_THRST), .dat(16'h00fd));
+  ChkVal16(.act(iDUT.ifly.thrst), .exp(16'h0fd), .name("Thrst"));
+  ChkPosAck;
+
+  repeat(90)@(posedge frnt_ESC);
+  // ptch roll and yaw should converge to the values we want
+  // check if within 75%
+  ChkPerc(.act(iDUT.ifly.ptch), .exp(iDUT.ifly.d_ptch), .name("Ptch"));
+  ChkPerc(.act(iDUT.ifly.roll), .exp(iDUT.ifly.d_roll), .name("Roll"));
+  ChkPerc(.act(iDUT.ifly.yaw), .exp(iDUT.ifly.d_yaw), .name("Yaw"));
+
+  // does increasing thrst make motors faster?
+  prev_frnt_spd = iDUT.frnt_spd;
+  prev_bck_spd = iDUT.bck_spd;
+  prev_rgt_spd = iDUT.rght_spd;
+  prev_lft_spd = iDUT.lft_spd;
+
+  SendCmd(.comd(SET_THRST), .dat(16'h01ff));
+  ChkVal16(.act(iDUT.ifly.thrst), .exp(16'h01ff), .name("Thrst"));
+  ChkPosAck;
+
+  repeat(10)@(posedge clk);
+  ChkGtr(.act(iDUT.frnt_spd), .exp(prev_frnt_spd), .name("frnt_spd"));
+  ChkGtr(.act(iDUT.rght_spd), .exp(prev_rgt_spd), .name("rght_spd"));
+  ChkGtr(.act(iDUT.lft_spd), .exp(prev_lft_spd), .name("lft_spd"));
+  ChkGtr(.act(iDUT.bck_spd), .exp(prev_bck_spd), .name("bck_spd"));
+
+  // verify copter can land after takeoff
+  SendCmd(.comd(EMER_LAND), .dat(NO_DATA));
+  ChkVal16(.act(iDUT.ifly.d_ptch), .exp(16'd0), .name("DPtch"));
+  ChkVal16(.act(iDUT.ifly.d_yaw), .exp(16'd0), .name("DYaw"));
+  ChkVal16(.act(iDUT.ifly.d_roll), .exp(16'd0), .name("DRoll"));
+  ChkVal16(.act(iDUT.ifly.thrst), .exp(16'd0), .name("Thrst"));
   ChkPosAck;
 
   $display("Success!");
