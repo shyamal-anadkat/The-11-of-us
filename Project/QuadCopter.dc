@@ -72,7 +72,7 @@ set_clock_uncertainty 0.15 clk
 
 ungroup -all -flatten
 set_fix_hold clk
-compile_high
+compile -map_effort high
 check_design
 
 #########################

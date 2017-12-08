@@ -194,42 +194,42 @@ always_comb begin
 	case (state)
 		INIT1: begin
 			if (&timer) begin
+			    cmd = WR_EN_INT;
 				wrt = 1'b1;
 				next = INIT2;
 			end
 			else
 				next = INIT1;
-			cmd = WR_EN_INT;
 		end
 		
 		INIT2: begin
 			if (&timer) begin
+			    cmd = WR_SETUP_ACCL;
 				wrt = 1'b1;
 				next = INIT3;
 			end
 			else
 				next = INIT2;
-			cmd = WR_SETUP_ACCL;
 		end
 		
 		INIT3: begin
 			if (&timer) begin
+				cmd = WR_SETUP_GYRO;
 				wrt = 1'b1;
 				next = INIT4;
 			end
 			else
 				next = INIT3;
-			cmd = WR_SETUP_GYRO;
 		end
 		
 		INIT4: begin
 			if (&timer) begin
+				cmd = WR_ROUNDING_ON;
 				wrt = 1'b1;
 				next = WAIT_FOR_INT;
 			end
 			else
 				next = INIT4;
-			cmd = WR_ROUNDING_ON;
 		end
 		
 		WAIT_FOR_INT: begin
