@@ -1,0 +1,94 @@
+##########################
+##### Authors #####
+# Shyamal Anadkat 
+# Eric Heinz 
+# Sanjay Rajmohan 
+# ECE551
+##########################
+
+##########################
+# Files to read - seperated by space #
+##########################
+read_file -format sverilog {./QuadCopter.v ./UART_tx.v ./UART_rcv.sv ./UART.v \
+./cmd_cfg.sv ./ESC_Interface.sv ./ESCs.sv ./flght_cntrl.sv ./inert_intf.sv \
+./inertial_integrator.sv ./PB_release.sv ./rst_synch.sv ./UART_wrapper.sv \
+./SPI_mstr16.sv ./A2D_intf.sv ./ADC128S.sv ./CommMaster.sv ./SPI_ADC128S.sv } 
+
+##########################
+## Set current design to UART and link ###
+##########################
+set current_design QuadCopter
+link
+
+##########################
+# Define clock - 500MHz #
+##########################
+create_clock -name "clk" -period 2 -waveform {0 1} { clk } 
+set_dont_touch_network [find port clk]
+
+##########################
+# setup pointer containing all inputs except clock #
+##########################
+set prim_inputs [remove_from_collection [all_inputs] [find port clk]]
+
+##########################
+# set input delay(.5) and drive all inputs #
+##########################
+set_input_delay -clock clk 0.5 [copy_collection $prim_inputs]
+set inputs_without_rst_clk [remove_from_collection [remove_from_collection [all_inputs] [find port rst_n]] [find port clk]]
+set_driving_cell -lib_cell ND2D2BWP -library tcbn40lpbwptc $inputs_without_rst_clk
+
+##########################
+# Set output delay(.75) & load(.15) on all outputs #
+# Defines an output delay of 0.75ns on all outputs.
+# Defines a 0.15pf load on all outputs.
+##########################
+set_output_delay -clock clk 0.75 [all_outputs]
+set_load 0.15 [all_outputs]
+
+#################################
+# Max transition time for Hot-E reasons #
+# Sets a max transition time of 0.15ns on all nodes
+#################################
+set_max_transition 0.15 [current_design]
+
+#####################################
+# Wire load model allows it to estimate internal parasitics #
+####################################
+set_wire_load_model -name TSMC32K_Lowk_Conservative \
+-library tcbn40lpbwptc
+
+#########################
+# Now actually synthesize for 1st time #
+#########################
+set current_design QuadCopter
+
+#########################
+## smash the hierarchy (design ware component)
+#########################
+ungroup -all -flatten
+compile -map_effort high
+check_design
+
+set_clock_uncertainty 0.15 clk
+set_fix_hold clk
+
+ungroup -all -flatten
+compile -map_effort high
+check_design
+
+#########################
+## report min and max delay
+#########################
+report_timing -delay max > max_delay.rpt
+report_timing -delay min > min_delay.rpt
+
+#########################
+## design ware component area report
+#########################
+report_area > area.txt
+
+#########################
+# output vg netlist (flat)
+#########################
+write -format verilog QuadCopter -output QuadCopter.vg
