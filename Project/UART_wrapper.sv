@@ -21,53 +21,42 @@ UART uart(.clk(clk), .rst_n(rst_n), .RX(RX), .TX(TX), .rx_rdy(rdy), .clr_rx_rdy(
           .rx_data(curr_data), .trmt(snd_resp), .tx_data(resp), .tx_done(resp_sent));
 
 // Define states
-typedef enum {WAIT1, WAIT2, WAIT3} State;
+typedef enum logic [1:0] {WAIT1, WAIT2, WAIT3} State;
 State state, next_state;
 
 // ff to control cmd data
-always_ff@(posedge clk, negedge rst_n) begin
-  if (~rst_n) begin
+always_ff@(posedge clk, negedge rst_n)
+  if (~rst_n)
     data_ff1 <= 8'd0;
-  end else begin
-    if (assert_mux_1)
-      data_ff1 <= curr_data;
-  end
-end
+  else if (assert_mux_1)
+    data_ff1 <= curr_data;
 
 // ff to control upper 8 bits of data
-always_ff@(posedge clk, negedge rst_n) begin
-  if (~rst_n) begin
+always_ff@(posedge clk, negedge rst_n)
+  if (~rst_n)
     data_ff2 <= 8'd0;
-  end else begin
-    if (assert_mux_2)
-      data_ff2 <= curr_data;
-  end
-end
+  else if (assert_mux_2)
+    data_ff2 <= curr_data;
 
 // data control
 assign cmd = data_ff1;
 assign data = {data_ff2, curr_data};
 
 // ff to control state transitions
-always_ff@(posedge clk, negedge rst_n) begin
-  if (~rst_n) begin
+always_ff@(posedge clk, negedge rst_n)
+  if (~rst_n)
     state <= WAIT1;
-  end else begin
+  else
     state <= next_state;
-  end
-end
 
 // ff to control cmd_rdy
-always_ff@(posedge clk, negedge rst_n) begin
-  if (~rst_n) begin
-    cmd_rdy = 1'b0;
-  end else begin
-    if (clr_cmd_rdy | clr_cmd_rdy_i)
-      cmd_rdy = 1'b0;
-    else if (set_cmd_rdy)
-      cmd_rdy = 1'b1;
-  end
-end
+always_ff@(posedge clk, negedge rst_n)
+  if (~rst_n)
+    cmd_rdy <= 1'b0;
+  else if (clr_cmd_rdy | clr_cmd_rdy_i)
+    cmd_rdy <= 1'b0;
+  else if (set_cmd_rdy)
+    cmd_rdy <= 1'b1;
 
 // state contorl logic
 always_comb begin

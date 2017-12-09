@@ -23,10 +23,22 @@ output reg PWM;
 //  .32usec for 50MHz clk => 16 clk cycles
 //  1 ms => 50,000 clk cycles
 parameter PERIOD_WIDTH = 20;
+localparam MIN_RUN_SPEED = 13'h200; // minimum speed while running  
 reg [PERIOD_WIDTH-1:0] counter;
 
+/// USED FLOPPED VERSION OF SPEED FOR PIPELINING ///
+/// FOR AREA OPTIMIZATION ///
+logic [10:0] SPEED_FLOPD;
+always_ff @(posedge clk or negedge rst_n) begin
+	if(!rst_n) begin
+		SPEED_FLOPD <= MIN_RUN_SPEED;
+	end else begin
+		SPEED_FLOPD <= SPEED;
+	end
+end
+
 wire [11:0] comp_speed;
-assign comp_speed = SPEED + OFF;
+assign comp_speed = SPEED_FLOPD + OFF;
 
 wire [15:0] promote_comp_speed;
 // left shift comp_speed by four

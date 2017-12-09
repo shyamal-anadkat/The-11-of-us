@@ -1,5 +1,5 @@
 ##########################
-##### Authors #####
+######### Authors ########
 # Shyamal Anadkat 
 # Eric Heinz 
 # Sanjay Rajmohan 
@@ -7,7 +7,7 @@
 ##########################
 
 ##########################
-# Files to read - seperated by space #
+# Files to read #
 ##########################
 read_file -format sverilog {./QuadCopter.v ./UART_tx.v ./UART_rcv.sv ./UART.v \
 ./cmd_cfg.sv ./ESC_Interface.sv ./ESCs.sv ./flght_cntrl.sv ./inert_intf.sv \
@@ -21,7 +21,7 @@ set current_design QuadCopter
 link
 
 ##########################
-# Define clock - 500MHz #
+# Define clock - 400MHz / 2.5ns period #
 ##########################
 create_clock -name "clk" -period 2.5 -waveform {0 1} { clk } 
 set_dont_touch_network [find port clk]
