@@ -2,21 +2,21 @@
 /* Main module for flight control
 /************************************/
 module flght_cntrl(clk,rst_n,vld,inertial_cal,d_ptch,d_roll,d_yaw,ptch,
-		roll,yaw,thrst,frnt_spd,bck_spd,lft_spd,rght_spd);
-				
-parameter D_QUEUE_DEPTH = 14;	// delay for derivative term
-				
+    roll,yaw,thrst,frnt_spd,bck_spd,lft_spd,rght_spd);
+        
+parameter D_QUEUE_DEPTH = 14; // delay for derivative term
+        
 input clk,rst_n;
-input vld;			// tells when a new valid inertial reading ready
-				// only update D_QUEUE on vld readings
-input inertial_cal;				// need to run motors at CAL_SPEED during inertial calibration
-input signed [15:0] d_ptch,d_roll,d_yaw;	// desired pitch roll and yaw (from cmd_cfg)
-input signed [15:0] ptch,roll,yaw;		// actual pitch roll and yaw (from inertial interface)
-input [8:0] thrst;			// thrust level from slider
-output [10:0] frnt_spd;			// 11-bit unsigned speed at which to run front motor
-output [10:0] bck_spd;			// 11-bit unsigned speed at which to back front motor
-output [10:0] lft_spd;			// 11-bit unsigned speed at which to left front motor
-output [10:0] rght_spd;			// 11-bit unsigned speed at which to right front motor
+input vld;      // tells when a new valid inertial reading ready
+        // only update D_QUEUE on vld readings
+input inertial_cal;       // need to run motors at CAL_SPEED during inertial calibration
+input signed [15:0] d_ptch,d_roll,d_yaw;  // desired pitch roll and yaw (from cmd_cfg)
+input signed [15:0] ptch,roll,yaw;    // actual pitch roll and yaw (from inertial interface)
+input [8:0] thrst;      // thrust level from slider
+output [10:0] frnt_spd;     // 11-bit unsigned speed at which to run front motor
+output [10:0] bck_spd;      // 11-bit unsigned speed at which to back front motor
+output [10:0] lft_spd;      // 11-bit unsigned speed at which to left front motor
+output [10:0] rght_spd;     // 11-bit unsigned speed at which to right front motor
 
 ///////////////////////////////////////////////////
 // Need integer for loop used to create D_QUEUE //
@@ -24,25 +24,32 @@ output [10:0] rght_spd;			// 11-bit unsigned speed at which to right front motor
 integer x;
 //////////////////////////////
 // Define needed registers //
-////////////////////////////								
+////////////////////////////                
 reg signed [9:0] prev_ptch_err[0:D_QUEUE_DEPTH-1];
 reg signed [9:0] prev_roll_err[0:D_QUEUE_DEPTH-1];
-reg signed [9:0] prev_yaw_err[0:D_QUEUE_DEPTH-1];	// need previous error terms for D of PD
+reg signed [9:0] prev_yaw_err[0:D_QUEUE_DEPTH-1]; // need previous error terms for D of PD
 
 ///////////////////////////////////////////////////////////////
 // some Parameters to keep things more generic and flexible //
 /////////////////////////////////////////////////////////////
   
-localparam CAL_SPEED = 11'h1B0;		// speed to run motors at during inertial calibration
-localparam MIN_RUN_SPEED = 13'h200;	// minimum speed while running  
-localparam D_COEFF = 6'b00111;		// D coefficient in PID control = +7
+localparam CAL_SPEED = 11'h1B0;   // speed to run motors at during inertial calibration
+localparam MIN_RUN_SPEED = 13'h200; // minimum speed while running  
+localparam D_COEFF = 6'b00111;    // D coefficient in PID control = +7
 
 //////////////////////////////////////////////////////
 //                                                 //
 // Perform calculations on pitch, roll, and yaw   //
 //                                               //
 //////////////////////////////////////////////////
-
+logic [8:0] thrst_flopd;  
+always_ff @(posedge clk or negedge rst_n) begin
+  if(!rst_n) begin
+     thrst_flopd <= 9'h000;
+  end else begin
+     thrst_flopd <= thrst;
+  end
+end
 //////////////////////////
 // Pitch calculations  //
 ////////////////////////
@@ -52,6 +59,9 @@ wire signed [9:0] ptch_pterm;
 wire signed [9:0] ptch_D_diff;
 wire signed [5:0] ptch_D_diff_sat;
 wire signed [11:0] ptch_dterm;
+
+logic signed [9:0] ptch_pterm_flopd;
+logic signed [11:0] ptch_dterm_flopd;
 
 // Get error term
 assign ptch_err = ptch - d_ptch;
@@ -65,6 +75,16 @@ saturate sat_ptch(.signed_err(ptch_err), .signed_err_sat(ptch_err_sat),
 // Get dterm
 assign ptch_dterm = ptch_D_diff_sat * $signed(D_COEFF);
 
+always_ff @(posedge clk or negedge rst_n) begin
+  if(!rst_n) begin
+     ptch_dterm_flopd <= 10'h000;
+     ptch_pterm_flopd <= 10'h000;
+  end else begin
+     ptch_dterm_flopd <= ptch_dterm ;
+     ptch_pterm_flopd <= ptch_pterm ;
+  end
+end
+
 ///////////////////////
 // Roll calculations //
 ///////////////////////
@@ -74,6 +94,9 @@ wire signed [9:0] roll_pterm;
 wire signed [9:0] roll_D_diff;
 wire signed [5:0] roll_D_diff_sat;
 wire signed [11:0] roll_dterm;
+
+logic signed [9:0] roll_pterm_flopd;
+logic signed [11:0] roll_dterm_flopd;
 
 // Get error term
 assign roll_err = roll - d_roll;
@@ -86,8 +109,15 @@ saturate sat_roll(.signed_err(roll_err), .signed_err_sat(roll_err_sat),
              .signed_pterm(roll_pterm));
 // Get dterm
 assign roll_dterm = roll_D_diff_sat * $signed(D_COEFF);
-
-
+always_ff @(posedge clk or negedge rst_n) begin
+  if(!rst_n) begin
+     roll_dterm_flopd <= 10'h000;
+     roll_pterm_flopd <= 10'h000;
+  end else begin
+     roll_dterm_flopd <= (roll_dterm) ;
+     roll_pterm_flopd <= (roll_pterm) ;
+  end
+end
 ///////////////////////
 // Yaw calculations  //
 ///////////////////////
@@ -97,6 +127,9 @@ wire signed [9:0] yaw_pterm;
 wire signed [9:0] yaw_D_diff;
 wire signed [5:0] yaw_D_diff_sat;
 wire signed [11:0] yaw_dterm;
+
+logic signed [9:0] yaw_pterm_flopd;
+logic signed [11:0] yaw_dterm_flopd;
 
 // Get error term
 assign yaw_err = yaw - d_yaw;
@@ -109,7 +142,16 @@ saturate sat_yaw(.signed_err(yaw_err), .signed_err_sat(yaw_err_sat),
              .signed_pterm(yaw_pterm));
 // Get dterm
 assign yaw_dterm = yaw_D_diff_sat * $signed(D_COEFF);
-  
+
+always_ff @(posedge clk or negedge rst_n) begin
+  if(!rst_n) begin
+     yaw_dterm_flopd <= 10'h000;
+     yaw_pterm_flopd <= 10'h000;
+  end else begin
+     yaw_dterm_flopd <=  (yaw_dterm) ;
+     yaw_pterm_flopd <=  (yaw_pterm) ;
+  end
+end
   
 /// Logic to control queue ///
 always_ff@(posedge clk, negedge rst_n) begin
@@ -137,10 +179,14 @@ end
 
 // Bring together and perform arithmetic ops
 wire [12:0] frnt_calc, bck_calc, lft_calc, rght_calc;
-assign frnt_calc = {4'h0,thrst} + MIN_RUN_SPEED - {{3{ptch_pterm[9]}}, ptch_pterm} - {ptch_dterm[11],ptch_dterm} - {{3{yaw_pterm[9]}},yaw_pterm} - {yaw_dterm[11],yaw_dterm};
-assign bck_calc  = {4'h0,thrst} + MIN_RUN_SPEED + {{3{ptch_pterm[9]}}, ptch_pterm} + {ptch_dterm[11],ptch_dterm} - {{3{yaw_pterm[9]}},yaw_pterm} - {yaw_dterm[11],yaw_dterm};
-assign lft_calc  = {4'h0,thrst} + MIN_RUN_SPEED - {{3{roll_pterm[9]}}, roll_pterm} - {roll_dterm[11],roll_dterm} + {{3{yaw_pterm[9]}},yaw_pterm} + {yaw_dterm[11],yaw_dterm};
-assign rght_calc = {4'h0,thrst} + MIN_RUN_SPEED + {{3{roll_pterm[9]}}, roll_pterm} + {roll_dterm[11],roll_dterm} + {{3{yaw_pterm[9]}},yaw_pterm} + {yaw_dterm[11],yaw_dterm};
+assign frnt_calc = {4'h0,thrst_flopd} + MIN_RUN_SPEED - {{3{ptch_pterm_flopd[9]}}, 
+ptch_pterm_flopd} - {ptch_dterm_flopd[11],ptch_dterm_flopd} - {{3{yaw_pterm_flopd[9]}},yaw_pterm_flopd} - {yaw_dterm_flopd[11],yaw_dterm_flopd};
+assign bck_calc  = {4'h0,thrst_flopd} + MIN_RUN_SPEED + {{3{ptch_pterm_flopd[9]}}, 
+ptch_pterm_flopd} + {ptch_dterm_flopd[11],ptch_dterm_flopd} - {{3{yaw_pterm_flopd[9]}},yaw_pterm_flopd} - {yaw_dterm_flopd[11],yaw_dterm_flopd};
+assign lft_calc  = {4'h0,thrst_flopd} + MIN_RUN_SPEED - {{3{roll_pterm_flopd[9]}}, 
+roll_pterm_flopd} - {roll_dterm_flopd[11],roll_dterm_flopd} + {{3{yaw_pterm_flopd[9]}},yaw_pterm_flopd} + {yaw_dterm_flopd[11],yaw_dterm_flopd};
+assign rght_calc = {4'h0,thrst_flopd} + MIN_RUN_SPEED + {{3{roll_pterm_flopd[9]}}, 
+roll_pterm_flopd} + {roll_dterm_flopd[11],roll_dterm_flopd} + {{3{yaw_pterm_flopd[9]}},yaw_pterm_flopd} + {yaw_dterm_flopd[11],yaw_dterm_flopd};
 
 // saturate each *_calc
 wire [10:0] frnt_sat;
@@ -200,21 +246,21 @@ assign signed_pterm = {signed_err_sat[9], signed_err_sat[9:1]} + {{3{signed_err_
 
 // check if neg
 assign signed_err_sat = signed_err[16] ? 
-				// this is neg check
-				// if they are not all 1's, then return saturated value; else trim
-				~&signed_err[15:9] ? 10'b1000000000 : signed_err[9:0]
-			:
-				 // this is pos check
-				 // if any are 1's, return sat value; else trim
-				 |signed_err[15:9] ? 10'b0111111111 : signed_err[8:0];
-			
+        // this is neg check
+        // if they are not all 1's, then return saturated value; else trim
+        ~&signed_err[15:9] ? 10'b1000000000 : signed_err[9:0]
+      :
+         // this is pos check
+         // if any are 1's, return sat value; else trim
+         |signed_err[15:9] ? 10'b0111111111 : signed_err[8:0];
+      
 assign signed_D_diff_sat = signed_D_diff[9] ? 
-				// this is neg check
-				// if they are not all 1's, then return saturated value; else trim
-				~&signed_D_diff[8:5] ? 6'b100000 : signed_D_diff[5:0]
-			   :
-				 // this is pos
-				 // if any are 1's, return sat value; else trim
-				 |signed_D_diff[8:5] ? 6'b011111 : signed_D_diff[5:0];	
+        // this is neg check
+        // if they are not all 1's, then return saturated value; else trim
+        ~&signed_D_diff[8:5] ? 6'b100000 : signed_D_diff[5:0]
+         :
+         // this is pos
+         // if any are 1's, return sat value; else trim
+         |signed_D_diff[8:5] ? 6'b011111 : signed_D_diff[5:0];  
 
 endmodule
