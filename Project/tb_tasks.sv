@@ -7,6 +7,7 @@ data = 16'h0000;
 send_cmd = 1'b0;
 clr_resp_rdy = 1'b0;
 @(posedge clk);
+@(negedge clk);
 RST_n = 1'b1;
 @(posedge clk);
 endtask
