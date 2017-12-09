@@ -59,6 +59,7 @@ localparam MTRS_OFF = 8'h08;
 localparam NO_DATA = 16'd0;
 
 reg [10:0] prev_frnt_spd, prev_bck_spd, prev_rgt_spd, prev_lft_spd;
+localparam MIN_RUN_SPEED = 13'h200;
 
 initial begin
 
@@ -102,10 +103,10 @@ initial begin
   ChkPosAck;
 
   repeat(10)@(posedge clk);
-  ChkVal16(.act(iDUT.frnt_spd), .exp(16'd0), .name("frnt_spd"));
-  ChkVal16(.act(iDUT.rght_spd), .exp(16'd0), .name("rght_spd"));
-  ChkVal16(.act(iDUT.lft_spd), .exp(16'd0), .name("lft_spd"));
-  ChkVal16(.act(iDUT.bck_spd), .exp(16'd0), .name("bck_spd"));
+  ChkVal16(.act(iDUT.frnt_spd), .exp(MIN_RUN_SPEED), .name("frnt_spd"));
+  ChkVal16(.act(iDUT.rght_spd), .exp(MIN_RUN_SPEED), .name("rght_spd"));
+  ChkVal16(.act(iDUT.lft_spd), .exp(MIN_RUN_SPEED), .name("lft_spd"));
+  ChkVal16(.act(iDUT.bck_spd), .exp(MIN_RUN_SPEED), .name("bck_spd"));
 
   // verify copter can land after takeoff
   SendCmd(.comd(EMER_LAND), .dat(NO_DATA));
@@ -113,9 +114,13 @@ initial begin
   ChkVal16(.act(iDUT.ifly.d_yaw), .exp(16'd0), .name("DYaw"));
   ChkVal16(.act(iDUT.ifly.d_roll), .exp(16'd0), .name("DRoll"));
   ChkVal16(.act(iDUT.ifly.thrst), .exp(16'd0), .name("Thrst"));
+  ChkVal16(.act(iDUT.frnt_spd), .exp(MIN_RUN_SPEED), .name("frnt_spd"));
+  ChkVal16(.act(iDUT.rght_spd), .exp(MIN_RUN_SPEED), .name("rght_spd"));
+  ChkVal16(.act(iDUT.lft_spd), .exp(MIN_RUN_SPEED), .name("lft_spd"));
+  ChkVal16(.act(iDUT.bck_spd), .exp(MIN_RUN_SPEED), .name("bck_spd"));
   ChkPosAck;
 
-  $display("Success!");
+  $display("Success! Thrst tb passed");
   $stop();
 
 end

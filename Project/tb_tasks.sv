@@ -53,7 +53,7 @@ clr_resp_rdy = 1'b1;
 clr_resp_rdy = 1'b0;
 endtask
 
-task ChkVal16(input [15:0] act, input [15:0] exp, input [6*8:0] name);
+task ChkVal16(input [15:0] act, input [15:0] exp, input [8*8:0] name);
   if (act != exp) begin
     $display("%s incorrectly set. Was 0x%x, should be 0x%x", name, act, exp);
     $stop();
@@ -82,7 +82,7 @@ task ChkPerc(input [15:0] act, input [15:0] exp, input[6:0] perc, input [6*8:0] 
   Abs16(act);
   Abs16(exp);
 
-  if (act> exp) begin
+  if (act > exp) begin
     denom = act;
   end else begin
     denom = exp;
@@ -92,7 +92,7 @@ task ChkPerc(input [15:0] act, input [15:0] exp, input[6:0] perc, input [6*8:0] 
   Abs16(result);
   // subtract error from 100 to get percent accuracy
   if ((100 - result) < perc) begin
-    $display("%s not converging. Was 0x%x, should be within %d percent of 0x%x", name, act, perc, exp);
+    $display("%s not converging. Was 0x%x, should be within %d percent of 0x%x. Actual perc %d", name, act, perc, exp, (100 - result));
     $stop();
   end
 endtask

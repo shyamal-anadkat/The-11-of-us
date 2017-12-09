@@ -108,9 +108,8 @@ initial begin
   ChkVal16(.act(iDUT.ifly.d_roll), .exp(16'h003a), .name("DRoll"));
   ChkPosAck;
 
-  // make yaw negative
-  SendCmd(.comd(SET_YAW), .dat(16'h800a));
-  ChkVal16(.act(iDUT.ifly.d_yaw), .exp(16'h800a), .name("DYaw"));
+  SendCmd(.comd(SET_YAW), .dat(16'h003a));
+  ChkVal16(.act(iDUT.ifly.d_yaw), .exp(16'h003a), .name("DYaw"));
   ChkPosAck;
 
   SendCmd(.comd(SET_THRST), .dat(16'h00fd));
