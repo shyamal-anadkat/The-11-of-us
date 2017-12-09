@@ -1,0 +1,148 @@
+ 
+****************************************
+Report : resources
+Design : QuadCopter
+Version: M-2016.12
+Date   : Fri Dec  8 10:12:33 2017
+****************************************
+
+Resource Sharing Report 
+
+===============================================================================
+|          |              |            | Contained     |                      |
+| Resource | Module       | Parameters | Resources     | Contained Operations |
+===============================================================================
+| iWRAPPER/uart/iTX/r65   |            |               |                      |
+|          | DW01_inc     | width=4    |               | iWRAPPER/uart/iTX/add_40 |
+| iWRAPPER/uart/iTX/r67   |            |               |                      |
+|          | DW01_dec     | width=12   |               | iWRAPPER/uart/iTX/sub_51 |
+| iWRAPPER/uart/iRX/r64   |            |               |                      |
+|          | DW01_inc     | width=4    |               | iWRAPPER/uart/iRX/add_41 |
+| iWRAPPER/uart/iRX/r66   |            |               |                      |
+|          | DW01_dec     | width=12   |               | iWRAPPER/uart/iRX/sub_55 |
+| iCMD/r109               |            |               |                      |
+|          | DW01_inc     | width=9    |               | iCMD/add_71          |
+| iNEMO/r67               |            |               |                      |
+|          | DW01_inc     | width=16   |               | iNEMO/add_64         |
+| iNEMO/spi/r72           |            |               |                      |
+|          | DW01_inc     | width=5    |               | iNEMO/spi/add_58     |
+| iNEMO/spi/r74           |            |               |                      |
+|          | DW01_inc     | width=5    |               | iNEMO/spi/add_69     |
+| iNEMO/integrator/r151   |            |               |                      |
+|          | DW01_sub     | width=16   |               | iNEMO/integrator/sub_100 |
+| iNEMO/integrator/r153   |            |               |                      |
+|          | DW01_sub     | width=16   |               | iNEMO/integrator/sub_101 |
+| iNEMO/integrator/r155   |            |               |                      |
+|          | DW01_sub     | width=16   |               | iNEMO/integrator/sub_102 |
+| iNEMO/integrator/r157   |            |               |                      |
+|          | DW01_inc     | width=3    |               | iNEMO/integrator/add_115 |
+| iNEMO/integrator/r167   |            |               |                      |
+|          | DW01_add     | width=27   |               | iNEMO/integrator/add_134 |
+| iNEMO/integrator/r169   |            |               |                      |
+|          | DW01_add     | width=20   |               | iNEMO/integrator/add_164 |
+| iNEMO/integrator/r171   |            |               |                      |
+|          | DW01_add     | width=20   |               | iNEMO/integrator/add_165 |
+| iNEMO/integrator/r173   |            |               |                      |
+|          | DW01_inc     | width=4    |               | iNEMO/integrator/add_172 |
+| iNEMO/integrator/r181   |            |               |                      |
+|          | DW01_cmp2    | width=16   |               | iNEMO/integrator/gt_212 |
+| iNEMO/integrator/r183   |            |               |                      |
+|          | DW01_cmp2    | width=16   |               | iNEMO/integrator/gt_214 |
+| iNEMO/integrator/r294   |            |               |                      |
+|          | DW01_sub     | width=17   |               | iNEMO/integrator/sub_203 |
+| iNEMO/integrator/r296   |            |               |                      |
+|          | DW02_mult    | A_width=16 |               | iNEMO/integrator/mult_201 |
+      |              | B_width=10 |               |                      |
+| iNEMO/integrator/r298   |            |               |                      |
+|          | DW02_mult    | A_width=17 |               | iNEMO/integrator/mult_203 |
+      |              | B_width=10 |               |                      |
+| iNEMO/integrator/r407   |            |               |                      |
+|          | DW01_add     | width=27   |               | iNEMO/integrator/add_1_root_add_0_root_add_133_2 |
+| iNEMO/integrator/r409   |            |               |                      |
+|          | DW01_add     | width=27   |               | iNEMO/integrator/add_0_root_add_0_root_add_133_2 |
+| iNEMO/integrator/r518   |            |               |                      |
+|          | DW01_add     | width=27   |               | iNEMO/integrator/add_1_root_add_0_root_add_132_2 |
+| iNEMO/integrator/r520   |            |               |                      |
+|          | DW01_add     | width=27   |               | iNEMO/integrator/add_0_root_add_0_root_add_132_2 |
+| ifly/r168               |            |               |                      |
+|          | DW01_sub     | width=17   |               | ifly/sub_57          |
+| ifly/r170               |            |               |                      |
+|          | DW01_sub     | width=10   |               | ifly/sub_59          |
+| ifly/r174               |            |               |                      |
+|          | DW01_sub     | width=17   |               | ifly/sub_79          |
+| ifly/r176               |            |               |                      |
+|          | DW01_sub     | width=10   |               | ifly/sub_81          |
+| ifly/r180               |            |               |                      |
+|          | DW01_sub     | width=17   |               | ifly/sub_102         |
+| ifly/r182               |            |               |                      |
+|          | DW01_sub     | width=10   |               | ifly/sub_104         |
+| ifly/r186               |            |               |                      |
+|          | DW01_add     | width=11   |               | ifly/add_140         |
+| ifly/r330               |            |               |                      |
+|          | DW02_mult    | A_width=6  |               | ifly/mult_66         |
+|          |              | B_width=4  |               |                      |
+| ifly/r332               |            |               |                      |
+|          | DW02_mult    | A_width=6  |               | ifly/mult_88         |
+|          |              | B_width=4  |               |                      |
+| ifly/r334               |            |               |                      |
+|          | DW02_mult    | A_width=6  |               | ifly/mult_111        |
+|          |              | B_width=4  |               |                      |
+| ifly/r454               |            |               |                      |
+|          | DW01_add     | width=13   |               | ifly/add_2_root_sub_0_root_add_142_3 |
+| ifly/r456               |            |               |                      |
+|          | DW01_sub     | width=13   |               | ifly/sub_3_root_sub_0_root_add_142_3 |
+| ifly/r458               |            |               |                      |
+|          | DW01_sub     | width=13   |               | ifly/sub_1_root_sub_0_root_add_142_3 |
+| ifly/r460               |            |               |                      |
+|          | DW01_add     | width=13   |               | ifly/add_0_root_sub_0_root_add_142_3 |
+| ifly/r581               |            |               |                      |
+|          | DW01_add     | width=13   |               | ifly/add_3_root_add_0_root_add_143_5 |
+| ifly/r583               |            |               |                      |
+|          | DW01_add     | width=13   |               | ifly/add_1_root_add_0_root_add_143_5 |
+| ifly/r585               |            |               |                      |
+|          | DW01_add     | width=13   |               | ifly/add_2_root_add_0_root_add_143_5 |
+| ifly/r587               |            |               |                      |
+|          | DW01_add     | width=13   |               | ifly/add_0_root_add_0_root_add_143_5 |
+| ifly/r708               |            |               |                      |
+|          | DW01_sub     | width=13   |               | ifly/sub_2_root_sub_0_root_sub_140_4 |
+| ifly/r710               |            |               |                      |
+|          | DW01_sub     | width=13   |               | ifly/sub_3_root_sub_0_root_sub_140_4 |
+| ifly/r712               |            |               |                      |
+|          | DW01_sub     | width=13   |               | ifly/sub_1_root_sub_0_root_sub_140_4 |
+| ifly/r714               |            |               |                      |
+|          | DW01_sub     | width=13   |               | ifly/sub_0_root_sub_0_root_sub_140_4 |
+| ifly/r834               |            |               |                      |
+|          | DW01_sub     | width=13   |               | ifly/sub_2_root_sub_0_root_sub_141_2 |
+| ifly/r836               |            |               |                      |
+|          | DW01_add     | width=13   |               | ifly/add_3_root_sub_0_root_sub_141_2 |
+| ifly/r838               |            |               |                      |
+|          | DW01_add     | width=13   |               | ifly/add_1_root_sub_0_root_sub_141_2 |
+| ifly/r840               |            |               |                      |
+|          | DW01_sub     | width=13   |               | ifly/sub_0_root_sub_0_root_sub_141_2 |
+| ifly/sat_ptch/r57       |            |               |                      |
+|          | DW01_add     | width=10   |               | ifly/sat_ptch/add_199 |
+| iESC/esc_frnt/r67       |            |               |                      |
+|          | DW01_inc     | width=18   |               | iESC/esc_frnt/add_43 |
+| iESC/esc_frnt/r69       |            |               |                      |
+|          | DW01_cmp2    | width=17   |               | iESC/esc_frnt/gte_48 |
+| iESC/esc_frnt/r176      |            |               |                      |
+|          | DW01_add     | width=12   |               | iESC/esc_frnt/add_29 |
+| iESC/esc_frnt/r178      |            |               |                      |
+|          | DW01_add     | width=17   |               | iESC/esc_frnt/add_36 |
+| iESC/esc_bck/r107       |            |               |                      |
+|          | DW01_add     | width=12   |               | iESC/esc_bck/add_29  |
+| iESC/esc_bck/r109       |            |               |                      |
+|          | DW01_add     | width=17   |               | iESC/esc_bck/add_36  |
+| iESC/esc_lft/r107       |            |               |                      |
+|          | DW01_add     | width=12   |               | iESC/esc_lft/add_29  |
+| iESC/esc_lft/r109       |            |               |                      |
+|          | DW01_add     | width=17   |               | iESC/esc_lft/add_36  |
+| iESC/esc_rght/r107      |            |               |                      |
+|          | DW01_add     | width=12   |               | iESC/esc_rght/add_29 |
+| iESC/esc_rght/r109      |            |               |                      |
+|          | DW01_add     | width=17   |               | iESC/esc_rght/add_36 |
+===============================================================================
+
+
+No implementations to report
+1
