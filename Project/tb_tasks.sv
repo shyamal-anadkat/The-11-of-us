@@ -71,9 +71,28 @@ task ChkVal(input [15:0] act, input [15:0] exp, input [6*8:0] name);
   end
 endtask
 
-task ChkPerc(input [15:0] act, input [15:0] exp, input [6*8:0] name);
-  if (100*act/exp < 75) begin
-    $display("%s not converging. Was 0x%x, should be close to 0x%x", name, act, exp);
+task Abs16(inout [15:0] a);
+  if (a < 0)
+    a = -a;
+endtask
+
+task ChkPerc(input [15:0] act, input [15:0] exp, input[6:0] perc, input [6*8:0] name);
+  reg[15:0] result;
+  reg[15:0] denom;
+  Abs16(act);
+  Abs16(exp);
+
+  if (act> exp) begin
+    denom = act;
+  end else begin
+    denom = exp;
+  end
+  // do percent error and check if one is negative and the other is not, make sure it doesnt give false results
+  assign result = 100*(act - exp)/denom;
+  Abs16(result);
+  // subtract error from 100 to get percent accuracy
+  if ((100 - result) < perc) begin
+    $display("%s not converging. Was 0x%x, should be within %d percent of 0x%x", name, act, perc, exp);
     $stop();
   end
 endtask
@@ -81,6 +100,13 @@ endtask
 task ChkGtr(input [10:0] act, input [10:0] exp, input [10*8:0] name);
   if (act <= exp) begin
     $display("%s was not greater than expected value. Was 0x%x should be greater than 0x%x", name, act, exp);
+    $stop();
+  end
+endtask
+
+task ChkLess(input [10:0] act, input [10:0] exp, input [10*8:0] name);
+  if (act >= exp) begin
+    $display("%s was not less than expected value. Was 0x%x should be less than 0x%x", name, act, exp);
     $stop();
   end
 endtask

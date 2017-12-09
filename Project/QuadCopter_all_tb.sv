@@ -1,4 +1,4 @@
-module QuadCopter_tb();
+module QuadCopter_all_tb();
 			
 //// Interconnects to DUT/support defined as type wire /////
 wire SS_n,SCLK,MOSI,MISO,INT;
@@ -120,9 +120,9 @@ initial begin
   repeat(90)@(posedge frnt_ESC);
   // ptch roll and yaw should converge to the values we want
   // check if within 75%
-  ChkPerc(.act(iDUT.ifly.ptch), .exp(iDUT.ifly.d_ptch), .name("Ptch"));
-  ChkPerc(.act(iDUT.ifly.roll), .exp(iDUT.ifly.d_roll), .name("Roll"));
-  ChkPerc(.act(iDUT.ifly.yaw), .exp(iDUT.ifly.d_yaw), .name("Yaw"));
+  ChkPerc(.act(iDUT.ifly.ptch), .exp(iDUT.ifly.d_ptch), .perc(75), .name("Ptch"));
+  ChkPerc(.act(iDUT.ifly.roll), .exp(iDUT.ifly.d_roll), .perc(75), .name("Roll"));
+  ChkPerc(.act(iDUT.ifly.yaw), .exp(iDUT.ifly.d_yaw), .perc(75), .name("Yaw"));
 
   // does increasing thrst make motors faster?
   prev_frnt_spd = iDUT.frnt_spd;
