@@ -106,7 +106,7 @@ initial begin
   ChkVal16(.act(iDUT.ifly.thrst), .exp(16'h0fd), .name("Thrst"));
   ChkPosAck;
 
-  $display("Success!");
+  $display("Success! Cmd tb passed");
   $stop();
 
 end

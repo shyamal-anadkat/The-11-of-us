@@ -68,6 +68,8 @@ initial begin
 
   // Ultimate command line sim cmd: 
   //  vsim -gui -novopt work.QuadCopter_all_tb; add wave -position insertpoint sim:/QuadCopter_all_tb/*; run
+  // From ssh to tux computers: 
+  //  vsim -c -do "run 4500ms; quit -f"  QuadCopter_all_tb
 
   Initialize();
 
