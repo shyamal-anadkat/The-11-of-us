@@ -1,15 +1,19 @@
 module ESCs(clk, rst_n, frnt_spd, bck_spd, lft_spd, rght_spd, motors_off, frnt, bck, lft, rght);
+// the *_spd are intermediate values
 input [10:0] frnt_spd, bck_spd, lft_spd, rght_spd;
 input clk, rst_n, motors_off;
 output frnt, bck, lft, rght;
 
+// parameters defined in project spec
 localparam FRNT_OFF = 10'h220;
 localparam BCK_OFF = 10'h220;
 localparam LFT_OFF = 10'h220;
 localparam RGHT_OFF = 10'h220;
 
 parameter WIDTH = 20;
+// duplicate bits of motors off so we can NAND in one go
 wire [10:0] motors_off_ext = {11{motors_off}};
+// these are the wires that will be used by ESC_interface
 wire [10:0] frnt_SPEED, bck_SPEED, lft_SPEED, rght_SPEED;
 wire [9:0] frnt_OFF, bck_OFF, lft_OFF, rght_OFF;
 
@@ -25,6 +29,7 @@ assign bck_OFF = BCK_OFF &~motors_off_ext;
 assign lft_OFF = LFT_OFF &~motors_off_ext;
 assign rght_OFF = RGHT_OFF &~motors_off_ext;
 
+// instantiate 4 ESCs for the four motors
 ESC_interface #(WIDTH) esc_frnt(.SPEED(frnt_SPEED), .OFF(frnt_OFF), .PWM(frnt), .clk(clk), .rst_n(rst_n));
 ESC_interface #(WIDTH) esc_bck (.SPEED(bck_SPEED),  .OFF(bck_OFF),  .PWM(bck),  .clk(clk), .rst_n(rst_n));
 ESC_interface #(WIDTH) esc_lft (.SPEED(lft_SPEED),  .OFF(lft_OFF),  .PWM(lft),  .clk(clk), .rst_n(rst_n));

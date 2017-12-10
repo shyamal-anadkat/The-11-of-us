@@ -61,15 +61,6 @@ localparam NO_DATA = 16'd0;
 
 initial begin
 
-  ///This is where you do the real work.
-  //This section could be done as a bunch of calls to testing sub tasks contained in a separate file.
-  
-  //You might want to consider having several versions of this file that test several different
-  //smaller things instead of having one huge test that runs forever.
-
-  // Ultimate command line sim cmd: 
-  //  vsim -gui -novopt work.QuadCopter_tb; add wave -position insertpoint sim:/QuadCopter_tb/*; run
-
   Initialize();
 
   ///////////////////////////////////////////////////////

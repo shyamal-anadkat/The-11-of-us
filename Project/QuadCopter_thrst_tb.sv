@@ -66,7 +66,10 @@ initial begin
 
   Initialize();
 
-  // does increasing thrst make motors faster?
+  //////////////////////////////////////////////////////////////
+  // does increasing thrst make motors slower?                //
+  //////////////////////////////////////////////////////////////
+  // save off previous values so we can see the change
   prev_frnt_spd = iDUT.frnt_spd;
   prev_bck_spd = iDUT.bck_spd;
   prev_rgt_spd = iDUT.rght_spd;
@@ -77,12 +80,16 @@ initial begin
   ChkPosAck;
 
   repeat(10)@(posedge clk);
+  // are the new values greater than the old?
   ChkGtr(.act(iDUT.frnt_spd), .exp(prev_frnt_spd), .name("frnt_spd"));
   ChkGtr(.act(iDUT.rght_spd), .exp(prev_rgt_spd), .name("rght_spd"));
   ChkGtr(.act(iDUT.lft_spd), .exp(prev_lft_spd), .name("lft_spd"));
   ChkGtr(.act(iDUT.bck_spd), .exp(prev_bck_spd), .name("bck_spd"));
 
-  // does decreasing thrst make motors slower?
+  //////////////////////////////////////////////////////////////
+  // does decreasing thrst make motors slower?                //
+  //////////////////////////////////////////////////////////////
+  // save off previous values so we can see the change
   prev_frnt_spd = iDUT.frnt_spd;
   prev_bck_spd = iDUT.bck_spd;
   prev_rgt_spd = iDUT.rght_spd;
@@ -93,6 +100,7 @@ initial begin
   ChkPosAck;
 
   repeat(10)@(posedge clk);
+  // are the new values less than the old?
   ChkLess(.act(iDUT.frnt_spd), .exp(prev_frnt_spd), .name("frnt_spd"));
   ChkLess(.act(iDUT.rght_spd), .exp(prev_rgt_spd), .name("rght_spd"));
   ChkLess(.act(iDUT.lft_spd), .exp(prev_lft_spd), .name("lft_spd"));
@@ -104,6 +112,7 @@ initial begin
   ChkPosAck;
 
   repeat(10)@(posedge clk);
+  // are the motors running at min speed?
   ChkVal16(.act(iDUT.frnt_spd), .exp(MIN_RUN_SPEED), .name("frnt_spd"));
   ChkVal16(.act(iDUT.rght_spd), .exp(MIN_RUN_SPEED), .name("rght_spd"));
   ChkVal16(.act(iDUT.lft_spd), .exp(MIN_RUN_SPEED), .name("lft_spd"));

@@ -63,14 +63,11 @@ reg [10:0] prev_frnt_spd, prev_bck_spd, prev_rgt_spd, prev_lft_spd;
 
 initial begin
 
-  ///This is where you do the real work.
-  //This section could be done as a bunch of calls to testing sub tasks contained in a separate file.
-  
-  //You might want to consider having several versions of this file that test several different
-  //smaller things instead of having one huge test that runs forever.
+  /// This is where we do the real work.
+  // This section is be done as a bunch of calls to testing sub tasks contained in a separate file.
 
   // Ultimate command line sim cmd: 
-  //  vsim -gui -novopt work.QuadCopter_tb; add wave -position insertpoint sim:/QuadCopter_tb/*; run
+  //  vsim -gui -novopt work.QuadCopter_all_tb; add wave -position insertpoint sim:/QuadCopter_all_tb/*; run
 
   Initialize();
 

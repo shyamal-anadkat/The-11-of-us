@@ -64,7 +64,7 @@ initial begin
   Initialize();
 
   ///////////////////////////////////////////////////////
-  // Test basic commands and responses                 //
+  // Test battery read command and response            //
   ///////////////////////////////////////////////////////
   SendCmd(.comd(REQ_BATT), .dat(NO_DATA));
   ChkResp(8'hC0);
