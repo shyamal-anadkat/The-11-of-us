@@ -1,0 +1,239 @@
+# //  Questa Sim-64
+# //  Version 10.6a linux_x86_64 Mar 16 2017
+# //
+# //  Copyright 1991-2017 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  QuestaSim and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+# Loading project post-syn
+# Compile of CommMaster.sv was successful.
+# Compile of CycloneIV.sv was successful.
+# Compile of QuadCopter.vg was successful.
+# Compile of QuadCopter_post_syn_tb.sv was successful.
+# Compile of ADC128S.sv was successful.
+# 5 compiles, 0 failed with no errors.
+# Compile of CommMaster.sv was successful.
+# Compile of CycloneIV.sv was successful.
+# Compile of QuadCopter.vg was successful.
+# Compile of QuadCopter_post_syn_tb.sv was successful.
+# Compile of ADC128S.sv was successful.
+# 5 compiles, 0 failed with no errors.
+# Compile of CommMaster.sv was successful.
+# Compile of CycloneIV.sv was successful.
+# Compile of QuadCopter.vg was successful.
+# Compile of QuadCopter_post_syn_tb.sv was successful.
+# Compile of ADC128S.sv was successful.
+# 5 compiles, 0 failed with no errors.
+vsim work.QuadCopter_post_syn_tb -t ns +notimingchecks -novopt -L TSMC_lib
+# vsim work.QuadCopter_post_syn_tb -t ns "+notimingchecks" -novopt -L TSMC_lib 
+# Start time: 18:54:04 on Dec 09,2017
+# ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
+# Refreshing /userspace/a/anadkat/ECE551/work.QuadCopter_post_syn_tb
+# Loading sv_std.std
+# Loading work.QuadCopter_post_syn_tb
+# Refreshing /userspace/a/anadkat/ECE551/work.CycloneIV
+# Loading work.CycloneIV
+# Refreshing /userspace/a/anadkat/ECE551/work.ADC128S
+# Loading work.ADC128S
+# Loading work.SPI_ADC128S
+# Refreshing /userspace/a/anadkat/ECE551/work.QuadCopter
+# Loading work.QuadCopter
+# Loading TSMC_lib.DFCNQD1BWP
+# Loading TSMC_lib.DFSNQD1BWP
+# Loading TSMC_lib.EDFQD1BWP
+# Loading TSMC_lib.EDFCNQD1BWP
+# Loading TSMC_lib.DFCND1BWP
+# Loading TSMC_lib.FA1D0BWP
+# Loading TSMC_lib.DFNCND1BWP
+# Loading TSMC_lib.EDFCNQD2BWP
+# Loading TSMC_lib.EDFCNQD4BWP
+# Loading TSMC_lib.EDFCND1BWP
+# Loading TSMC_lib.DFSNQD4BWP
+# Loading TSMC_lib.HA1D0BWP
+# Loading TSMC_lib.DFCND2BWP
+# Loading TSMC_lib.FA1D2BWP
+# Loading TSMC_lib.DFCNQD2BWP
+# Loading TSMC_lib.XOR3D0BWP
+# Loading TSMC_lib.DFCNQD4BWP
+# Loading TSMC_lib.MOAI22D0BWP
+# Loading TSMC_lib.OA22D1BWP
+# Loading TSMC_lib.MAOI222D1BWP
+# Loading TSMC_lib.MOAI22D1BWP
+# Loading TSMC_lib.OAI22D1BWP
+# Loading TSMC_lib.CKBD16BWP
+# Loading TSMC_lib.INR2XD0BWP
+# Loading TSMC_lib.INVD1BWP
+# Loading TSMC_lib.AOI21D1BWP
+# Loading TSMC_lib.INR2D2BWP
+# Loading TSMC_lib.OAI21D1BWP
+# Loading TSMC_lib.CKXOR2D1BWP
+# Loading TSMC_lib.NR2XD1BWP
+# Loading TSMC_lib.XNR2D0BWP
+# Loading TSMC_lib.OA21D1BWP
+# Loading TSMC_lib.CKND3BWP
+# Loading TSMC_lib.NR2D1BWP
+# Loading TSMC_lib.ND2D2BWP
+# Loading TSMC_lib.CKBD4BWP
+# Loading TSMC_lib.XNR2D1BWP
+# Loading TSMC_lib.IND2D1BWP
+# Loading TSMC_lib.CKND0BWP
+# Loading TSMC_lib.ND3D0BWP
+# Loading TSMC_lib.NR2XD0BWP
+# Loading TSMC_lib.CKND2D2BWP
+# Loading TSMC_lib.XOR2D0BWP
+# Loading TSMC_lib.ND2D3BWP
+# Loading TSMC_lib.IOA21D1BWP
+# Loading TSMC_lib.CKND6BWP
+# Loading TSMC_lib.ND4D1BWP
+# Loading TSMC_lib.XOR3D1BWP
+# Loading TSMC_lib.ND2D1BWP
+# Loading TSMC_lib.INR2D0BWP
+# Loading TSMC_lib.IOA21D0BWP
+# Loading TSMC_lib.INVD2BWP
+# Loading TSMC_lib.CKBD8BWP
+# Loading TSMC_lib.AOI22D1BWP
+# Loading TSMC_lib.INVD4BWP
+# Loading TSMC_lib.INR2D1BWP
+# Loading TSMC_lib.NR3D0BWP
+# Loading TSMC_lib.CKND2D0BWP
+# Loading TSMC_lib.ND3D1BWP
+# Loading TSMC_lib.CKAN2D1BWP
+# Loading TSMC_lib.CKAN2D0BWP
+# Loading TSMC_lib.AO21D2BWP
+# Loading TSMC_lib.AN2D4BWP
+# Loading TSMC_lib.INR2XD1BWP
+# Loading TSMC_lib.ND3D2BWP
+# Loading TSMC_lib.AN2XD1BWP
+# Loading TSMC_lib.IND2D0BWP
+# Loading TSMC_lib.ND2D0BWP
+# Loading TSMC_lib.CKXOR2D2BWP
+# Loading TSMC_lib.AO21D1BWP
+# Loading TSMC_lib.MUX2D0BWP
+# Loading TSMC_lib.XOR2D2BWP
+# Loading TSMC_lib.OR2D1BWP
+# Loading TSMC_lib.CKND8BWP
+# Loading TSMC_lib.CKND12BWP
+# Loading TSMC_lib.NR2D2BWP
+# Loading TSMC_lib.NR3D1BWP
+# Loading TSMC_lib.OAI21D0BWP
+# Loading TSMC_lib.AN3D0BWP
+# Loading TSMC_lib.AN4XD1BWP
+# Loading TSMC_lib.OAI22D2BWP
+# Loading TSMC_lib.NR2D0BWP
+# Loading TSMC_lib.OAI21D2BWP
+# Loading TSMC_lib.OA21D0BWP
+# Loading TSMC_lib.IOA22D2BWP
+# Loading TSMC_lib.OR2XD1BWP
+# Loading TSMC_lib.AOI22D0BWP
+# Loading TSMC_lib.AOI21D0BWP
+# Loading TSMC_lib.CKMUX2D1BWP
+# Loading TSMC_lib.CKBD12BWP
+# Loading TSMC_lib.CKBD3BWP
+# Loading TSMC_lib.CKBD2BWP
+# Loading TSMC_lib.OR2D0BWP
+# Loading TSMC_lib.NR2XD2BWP
+# Loading TSMC_lib.ND4D2BWP
+# Loading TSMC_lib.AN4D0BWP
+# Loading TSMC_lib.ND4D0BWP
+# Loading TSMC_lib.BUFFD1BWP
+# Loading TSMC_lib.BUFFD0BWP
+# Loading TSMC_lib.AOI21D2BWP
+# Loading TSMC_lib.IOA21D2BWP
+# Loading TSMC_lib.XOR3D2BWP
+# Loading TSMC_lib.INR2XD2BWP
+# Loading TSMC_lib.AOI21D4BWP
+# Loading TSMC_lib.AO31D1BWP
+# Loading TSMC_lib.AOI31D2BWP
+# Loading TSMC_lib.MAOI22D0BWP
+# Loading TSMC_lib.XNR3D0BWP
+# Loading TSMC_lib.AO21D0BWP
+# Loading TSMC_lib.IND3D0BWP
+# Loading TSMC_lib.OAI211D0BWP
+# Loading TSMC_lib.IAO21D0BWP
+# Loading TSMC_lib.ND3D3BWP
+# Loading TSMC_lib.OR3D0BWP
+# Loading TSMC_lib.OAI22D0BWP
+# Loading TSMC_lib.AOI31D0BWP
+# Loading TSMC_lib.AO22D0BWP
+# Loading TSMC_lib.OAI221D0BWP
+# Loading TSMC_lib.AOI32D0BWP
+# Loading TSMC_lib.AO222D0BWP
+# Loading TSMC_lib.OR2D2BWP
+# Loading TSMC_lib.OAI21D4BWP
+# Loading TSMC_lib.OAI211D2BWP
+# Loading TSMC_lib.CKBD6BWP
+# Loading TSMC_lib.MUX2ND1BWP
+# Loading TSMC_lib.CKBD1BWP
+# Loading TSMC_lib.OAI221D4BWP
+# Loading TSMC_lib.NR4D1BWP
+# Loading TSMC_lib.AOI22D2BWP
+# Loading TSMC_lib.INR3D1BWP
+# Loading TSMC_lib.OAI31D2BWP
+# Loading TSMC_lib.AOI22D4BWP
+# Loading TSMC_lib.NR4D8BWP
+# Loading TSMC_lib.CKND16BWP
+# Loading TSMC_lib.MUX2ND0BWP
+# Loading TSMC_lib.ND2D4BWP
+# Loading TSMC_lib.NR2XD3BWP
+# Loading TSMC_lib.MAOI222D2BWP
+# Loading TSMC_lib.NR2D4BWP
+# Loading TSMC_lib.OAI22D4BWP
+# Loading TSMC_lib.NR3D2BWP
+# Loading TSMC_lib.NR2D3BWP
+# Loading TSMC_lib.ND4D8BWP
+# Loading TSMC_lib.ND2D8BWP
+# Loading TSMC_lib.TIEHBWP
+# Loading TSMC_lib.AOI211XD0BWP
+# Loading TSMC_lib.IND2D2BWP
+# Loading TSMC_lib.OAI211D1BWP
+# Loading TSMC_lib.OAI31D1BWP
+# Loading TSMC_lib.OA21D2BWP
+# Loading TSMC_lib.AOI31D4BWP
+# Loading TSMC_lib.INVD0BWP
+# Loading TSMC_lib.AOI211D2BWP
+# Loading TSMC_lib.IND4D1BWP
+# Loading TSMC_lib.NR4D0BWP
+# Loading TSMC_lib.MAOI22D1BWP
+# Loading TSMC_lib.AO22D2BWP
+# Loading TSMC_lib.IAO21D1BWP
+# Loading TSMC_lib.AOI31D1BWP
+# Loading TSMC_lib.IOA22D1BWP
+# Loading TSMC_lib.IND3D1BWP
+# Loading TSMC_lib.IAO22D1BWP
+# Loading TSMC_lib.AO211D0BWP
+# Loading TSMC_lib.OAI32D1BWP
+# Loading TSMC_lib.OR4D0BWP
+# Loading TSMC_lib.OA211D0BWP
+# Loading TSMC_lib.AO31D0BWP
+# Loading TSMC_lib.OA31D0BWP
+# Loading TSMC_lib.OA32D0BWP
+# Loading TSMC_lib.MAOI222D0BWP
+# Loading TSMC_lib.INR3D0BWP
+# Refreshing /userspace/a/anadkat/ECE551/work.CommMaster
+# Loading work.CommMaster
+# Loading work.UART
+# Loading work.UART_tx
+# Loading work.UART_rcv
+# Loading TSMC_lib.tsmc_dff
+# Loading TSMC_lib.tsmc_xbuf
+# Loading TSMC_lib.tsmc_mux
+# ** Warning: (vsim-3017) /userspace/a/anadkat/ECE551/Project/QuadCopter.vg(3321): [TFMPC] - Too few port connections. Expected 5, found 4.
+#    Time: 0 ns  Iteration: 0  Instance: /QuadCopter_post_syn_tb/iDUT/\iRST/out1_reg  File: tcbn40lpbwp.v
+# ** Warning: (vsim-3722) /userspace/a/anadkat/ECE551/Project/QuadCopter.vg(3321): [TFMPC] - Missing connection for port 'QN'.
+# ** Warning: (vsim-3017) /userspace/a/anadkat/ECE551/Project/QuadCopter.vg(3366): [TFMPC] - Too few port connections. Expected 6, found 5.
+#    Time: 0 ns  Iteration: 0  Instance: /QuadCopter_post_syn_tb/iDUT/\iNEMO/yaw_h_reg[7]  File: tcbn40lpbwp.v
+# ** Warning: (vsim-3722) /userspace/a/anadkat/ECE551/Project/QuadCopter.vg(3366): [TFMPC] - Missing connection for port 'Q'.
+run -all
+# Success!
+# ** Note: $stop    : /userspace/a/anadkat/ECE551/Project/QuadCopter_post_syn_tb.sv(73)
+#    Time: 2053190 ns  Iteration: 1  Instance: /QuadCopter_post_syn_tb
+# Break in Module QuadCopter_post_syn_tb at /userspace/a/anadkat/ECE551/Project/QuadCopter_post_syn_tb.sv line 73
+# End time: 18:57:57 on Dec 09,2017, Elapsed time: 0:03:53
+# Errors: 0, Warnings: 5
