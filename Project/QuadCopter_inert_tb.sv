@@ -109,7 +109,7 @@ initial begin
   ChkPosAck;
   SendCmd(.comd(SET_ROLL), .dat(16'h001f));
   ChkPosAck;
-  SendCmd(.comd(SET_YAW), .dat(16'hfffe6));
+  SendCmd(.comd(SET_YAW), .dat(16'hffe6));
   ChkPosAck;
 
   // ptch roll and yaw should converge to the values we want

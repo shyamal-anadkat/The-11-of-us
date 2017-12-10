@@ -155,11 +155,11 @@ output signed [15:0] ptch, roll, yaw;
 	//////////////////////////////////////////////	
 	always @(posedge clk, negedge rst_n)
 	  if (!rst_n) begin
-	    ax_accum <= 20'h000000;
-		ay_accum <= 20'h000000;
+	    ax_accum <= 20'd0;
+		ay_accum <= 20'd0;
 	  end else if ((vld) && (&avg_cntr)) begin
-	    ax_accum <= 20'h000000;
-		ay_accum <= 20'h000000;
+	    ax_accum <= 20'd0;
+		ay_accum <= 20'd0;
 	  end else if (vld) begin
 	    ax_accum <= ax_accum + {{4{ax[15]}},ax};
 		ay_accum <= ay_accum + {{4{ay[15]}},ay};	  
