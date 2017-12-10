@@ -66,10 +66,13 @@ initial begin
   /// This is where we do the real work.
   // This section is be done as a bunch of calls to testing sub tasks contained in a separate file.
 
-  // Ultimate command line sim cmd: 
+  // Ultimate command line sim cmd when running ModelSim gui: 
   //  vsim -gui -novopt work.QuadCopter_all_tb; add wave -position insertpoint sim:/QuadCopter_all_tb/*; run
   // From ssh to tux computers: 
-  //  vsim -c -do "run 4500ms; quit -f"  QuadCopter_all_tb
+  //  first comile:
+  //    vsim -c -do "project open FinalProjectTUX.mpf; project compileall; quit -f"
+  //  then run test:
+  //    vsim -c -do "run 4500ms; quit -f"  QuadCopter_all_tb
 
   Initialize();
 
