@@ -1,3 +1,10 @@
-From our 4 major testbenches (all, thrst, inert, cmd), we were able to verify that our tests were getting very high code coverge in the relevant files. For example, the QuadCopter_cmd_tb.sv file gets 100% coverage for all criteria in UART_tx.v and 100% for statements, branches, and conditions in UART_wrapper.
+From our 4 major testbenches (all, thrst, inert, cmd), we were able to verify that our 
+tests were getting very high code coverge in the relevant files. For example, the 
+QuadCopter_cmd_tb.sv file gets 100% coverage for all criteria in UART_tx.v and 100% 
+for statements, branches, and conditions in UART_wrapper.
+
 For our QuadCopter_all_tb.sv file, we achieved a cumulative code coverage of 88.2%.
-Before reaching these results, we refactored our test bench so it was spread out over multiple files. Afterwards, we added some tests that tested more branch conditions which increased our code coverage.
+
+Before reaching these results, we refactored our test bench so it was spread out over 
+multiple files. Afterwards, we added some tests that tested more branch conditions
+which increased our code coverage.
