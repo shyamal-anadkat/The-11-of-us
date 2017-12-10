@@ -119,7 +119,7 @@ initial begin
   ChkPerc(.act(iDUT.ifly.roll), .exp(iDUT.ifly.d_roll), .perc(85), .name("Roll"));
   ChkPerc(.act(iDUT.ifly.yaw), .exp(iDUT.ifly.d_yaw), .perc(45), .name("Yaw"));
 
-  $display("Success! Pitch, roll, and yaw are converging");
+  $display("Success! inert tb passed. Pitch, roll, and yaw are converging");
   $stop();
 end
 

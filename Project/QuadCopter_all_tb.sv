@@ -147,7 +147,7 @@ initial begin
   ChkVal16(.act(iDUT.ifly.thrst), .exp(16'd0), .name("Thrst"));
   ChkPosAck;
 
-  $display("Success!");
+  $display("Success! 'all' tb passed");
   $stop();
 
 end

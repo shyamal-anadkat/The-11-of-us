@@ -69,7 +69,7 @@ initial begin
   SendCmd(.comd(REQ_BATT), .dat(NO_DATA));
   ChkResp(8'hC0);
 
-  $display("Success!");
+  $display("Success! Post syn test passed");
   $stop();
 
 end
