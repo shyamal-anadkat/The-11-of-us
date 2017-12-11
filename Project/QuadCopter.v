@@ -72,7 +72,7 @@ module QuadCopter(clk,RST_n,SS_n,SCLK,MOSI,MISO,INT,RX,TX,LED,FRNT,BCK,LFT,RGHT,
   ///////////////////////////////////////////////////////////////////////
   // Instantiate command config unit (interprets & executes commands) //
   /////////////////////////////////////////////////////////////////////	  
-  cmd_cfg #(9) iCMD(.clk(clk), .rst_n(rst_n), .cmd_rdy(cmd_rdy), .cmd(cmd), .data(data),
+  cmd_cfg #(26) iCMD(.clk(clk), .rst_n(rst_n), .cmd_rdy(cmd_rdy), .cmd(cmd), .data(data),
                .clr_cmd_rdy(clr_cmd_rdy), .resp(resp), .send_resp(send_resp),
 			   .d_ptch(d_ptch), .d_roll(d_roll), .d_yaw(d_yaw), .thrst(thrst),.batt(batt_level[11:4]),
 			   .strt_cal(strt_cal),.inertial_cal(inertial_cal),.motors_off(motors_off),
@@ -82,7 +82,7 @@ module QuadCopter(clk,RST_n,SS_n,SCLK,MOSI,MISO,INT,RX,TX,LED,FRNT,BCK,LFT,RGHT,
   //////////////////////////////////////////////////////////
   // Instantiate interface to inertial sensor (ST iNEMO) //
   ////////////////////////////////////////////////////////
-  inert_intf #(3) iNEMO(.clk(clk),.rst_n(rst_n),.ptch(ptch),.roll(roll),
+  inert_intf #(11) iNEMO(.clk(clk),.rst_n(rst_n),.ptch(ptch),.roll(roll),
                    .yaw(yaw),.strt_cal(strt_cal),.cal_done(cal_done),
 					.vld(vld),.SS_n(SS_n),.SCLK(SCLK),
 				     .MOSI(MOSI),.MISO(MISO),.INT(INT));
@@ -98,7 +98,7 @@ module QuadCopter(clk,RST_n,SS_n,SCLK,MOSI,MISO,INT,RX,TX,LED,FRNT,BCK,LFT,RGHT,
   ///////////////////////
   // Instantiate ESCs //
   /////////////////////					 
-  ESCs #(18) iESC (.clk(clk),.rst_n(rst_n),.frnt_spd(frnt_spd),.bck_spd(bck_spd),.lft_spd(lft_spd),
+  ESCs #(20) iESC (.clk(clk),.rst_n(rst_n),.frnt_spd(frnt_spd),.bck_spd(bck_spd),.lft_spd(lft_spd),
              .rght_spd(rght_spd),.motors_off(motors_off),.frnt(FRNT),.bck(BCK),.lft(LFT),.rght(RGHT));
 			 
   //Hey...what is this unit?  Remember back in Exercise08 and Exercise09 you created a ESC_interface,
