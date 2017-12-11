@@ -59,6 +59,7 @@ localparam MTRS_OFF = 8'h08;
 
 localparam NO_DATA = 16'd0;
 
+
 initial begin
 
   Initialize();
@@ -68,6 +69,9 @@ initial begin
   ///////////////////////////////////////////////////////
   SendCmd(.comd(REQ_BATT), .dat(NO_DATA));
   ChkResp(8'hC0);
+  SendCmd(.comd(REQ_BATT), .dat(NO_DATA));
+  ChkResp(8'hBF);
+  
 
   $display("Success! Post syn test passed");
   $stop();
