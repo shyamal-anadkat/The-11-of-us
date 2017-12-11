@@ -55,6 +55,7 @@ module QuadCopter(clk,RST_n,SS_n,SCLK,MOSI,MISO,INT,RX,TX,LED,FRNT,BCK,LFT,RGHT,
   wire [10:0] lft_spd;			// front motor speed from flght_cntrl
   wire [10:0] rght_spd;			// front motor speed from flght_cntrl  
   
+  assign LED = 8'h00;
   /////////////////////////////////////////////////////////////////////////
   // Instantiate UART_wrapper that receives commands from wireless link //
   /////////////////////////////////////////////////////////////////////// 

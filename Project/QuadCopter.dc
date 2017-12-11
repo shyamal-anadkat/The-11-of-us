@@ -68,12 +68,27 @@ set current_design QuadCopter
 compile -map_effort medium
 check_design
 
+#########################
+### set clock uncertainty ###
+#########################
 set_clock_uncertainty 0.15 clk
 
+#########################
+### ungroup heirarchy ###
+#########################
 ungroup -all -flatten
+
+#########################
+# compile ultra #
+#########################
 set_fix_hold clk
 compile_ultra
 check_design
+
+#########################
+### fix min_delay hold violation ###
+#########################
+compile -incremental_mapping -only_hold_time
 
 #########################
 ## report min and max delay

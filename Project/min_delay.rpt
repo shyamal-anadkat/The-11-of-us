@@ -6,7 +6,7 @@ Report : timing
         -max_paths 1
 Design : QuadCopter
 Version: M-2016.12
-Date   : Sat Dec  9 18:48:23 2017
+Date   : Mon Dec 11 11:02:04 2017
 ****************************************
 
  # A fanout number of 1000 was used for high fanout net computations.
@@ -14,9 +14,9 @@ Date   : Sat Dec  9 18:48:23 2017
 Operating Conditions: NCCOM   Library: tcbn40lpbwptc
 Wire Load Model Mode: segmented
 
-  Startpoint: iWRAPPER/uart/iRX/rx_ff1_reg
+  Startpoint: iNEMO/spi/rd_data_reg[2]
               (rising edge-triggered flip-flop clocked by clk)
-  Endpoint: iWRAPPER/uart/iRX/rx_ff2_reg
+  Endpoint: iNEMO/yaw_h_reg[2]
             (rising edge-triggered flip-flop clocked by clk)
   Path Group: clk
   Path Type: min
@@ -30,22 +30,22 @@ Wire Load Model Mode: segmented
   --------------------------------------------------------------------------
   clock clk (rise edge)                                   0.00       0.00
   clock network delay (ideal)                             0.00       0.00
-  iWRAPPER/uart/iRX/rx_ff1_reg/CP (DFSNQD1BWP)            0.00 #     0.00 r
-  iWRAPPER/uart/iRX/rx_ff1_reg/Q (DFSNQD1BWP)             0.12       0.12 f
-  iWRAPPER/uart/iRX/rx_ff2_reg/D (DFSNQD1BWP)             0.00       0.12 f
-  data arrival time                                                  0.12
+  iNEMO/spi/rd_data_reg[2]/CP (DFCNQD1BWP)                0.00 #     0.00 r
+  iNEMO/spi/rd_data_reg[2]/Q (DFCNQD1BWP)                 0.13       0.13 f
+  iNEMO/yaw_h_reg[2]/D (EDFCND1BWP)                       0.00       0.13 f
+  data arrival time                                                  0.13
 
   clock clk (rise edge)                                   0.00       0.00
   clock network delay (ideal)                             0.00       0.00
   clock uncertainty                                       0.15       0.15
-  iWRAPPER/uart/iRX/rx_ff2_reg/CP (DFSNQD1BWP)            0.00       0.15 r
-  library hold time                                       0.02       0.17
-  data required time                                                 0.17
+  iNEMO/yaw_h_reg[2]/CP (EDFCND1BWP)                      0.00       0.15 r
+  library hold time                                      -0.02       0.13
+  data required time                                                 0.13
   --------------------------------------------------------------------------
-  data required time                                                 0.17
-  data arrival time                                                 -0.12
+  data required time                                                 0.13
+  data arrival time                                                 -0.13
   --------------------------------------------------------------------------
-  slack (VIOLATED)                                                  -0.06
+  slack (MET)                                                        0.00
 
 
 1
