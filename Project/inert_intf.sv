@@ -193,6 +193,9 @@ always_comb begin
 	vld = 1'b0;
 	
 	case (state)
+		// Configure the inertial sensor on reset by writing the following four
+		// commands in the states INIT1, INIT2, INIT3 and INIT4. Timer is used to 
+		// ensure that the reset sequence of the sensor is ready
 		INIT1: begin
 			if (&timer) begin
 			    cmd = WR_EN_INT;
@@ -233,6 +236,10 @@ always_comb begin
 				next = INIT4;
 		end
 		
+		// Wait for an interrupt and once the interrupt is received, keep doing a sequence of
+		// reads for ptch, roll, yaw, ax and ay until another reset is received. Holding registers
+		// receive values through the enable signals that are received in every read state. The
+		// required command for each read is updated once done is asserted
 		WAIT_FOR_INT: begin
 			if (INT_ff2) begin
 				next = READ_PTCH_L;
@@ -342,6 +349,9 @@ always_comb begin
 				next = READ_AYL;
 		end
 		
+		// Once the last read of ay_h is complete, vld is asserted to let the integrator know
+		// that the readings are ready and then go back to the WAIT state and wait for another
+		// interrupt
 		READ_AYH: begin
 			if (done) begin
 				next = WAIT_FOR_INT;
